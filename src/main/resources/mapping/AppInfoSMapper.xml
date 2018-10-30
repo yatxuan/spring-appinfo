@@ -1,0 +1,505 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xuan.springappinfo.mapper.AppInfoSMapper">
+
+    <resultMap id="BaseResultMap" type="com.xuan.springappinfo.pojo.AppInfoS">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="softwareName" property="softwarename" jdbcType="VARCHAR"/>
+        <result column="APKName" property="apkname" jdbcType="VARCHAR"/>
+        <result column="supportROM" property="supportrom" jdbcType="VARCHAR"/>
+        <result column="interfaceLanguageId" property="interfacelanguageid" jdbcType="INTEGER"/>
+        <result column="softwareSize" property="softwaresize" jdbcType="DOUBLE"/>
+        <result column="updateDate" property="updatedate" jdbcType="TIMESTAMP"/>
+        <result column="devUserId" property="devuserid" jdbcType="INTEGER"/>
+        <result column="appIntroduction" property="appintroduction" jdbcType="VARCHAR"/>
+        <result column="statusId" property="statusid" jdbcType="INTEGER"/>
+        <result column="frameId" property="frameid" jdbcType="INTEGER"/>
+        <result column="onSaleDate" property="onsaledate" jdbcType="TIMESTAMP"/>
+        <result column="offSaleDate" property="offsaledate" jdbcType="TIMESTAMP"/>
+        <result column="flatformId" property="flatformid" jdbcType="INTEGER"/>
+        <result column="downloads" property="downloads" jdbcType="DOUBLE"/>
+        <result column="createdBy" property="createdby" jdbcType="INTEGER"/>
+        <result column="creationDate" property="creationdate" jdbcType="TIMESTAMP"/>
+        <result column="firstAPPClassId" property="firstappclassid" jdbcType="INTEGER"/>
+        <result column="twoAPPClassId" property="twoappclassid" jdbcType="INTEGER"/>
+        <result column="threeAPPClassId" property="threeappclassid" jdbcType="INTEGER"/>
+        <result column="logoPicPath" property="logopicpath" jdbcType="VARCHAR"/>
+        <result column="logoLocPath" property="logolocpath" jdbcType="VARCHAR"/>
+        <result column="versionId" property="versionid" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    id, softwareName, APKName, supportROM, interfaceLanguageId, softwareSize, updateDate, 
+    devUserId, appIntroduction, statusId, frameId, onSaleDate, offSaleDate, flatformId, 
+    downloads, createdBy, creationDate, firstAPPClassId, twoAPPClassId, threeAPPClassId, 
+    logoPicPath, logoLocPath, versionId
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from appinfos
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="getAppInfoSCount" resultType="java.lang.Integer">
+        SELECT
+        count(1)
+        FROM
+        appInfos app,
+        devUser dev,
+        devUser devtwo,
+        `STATUS` st,
+        frame fr,
+        flatform ff,
+        firstappclass fa,
+        twoAppClass ta,
+        threeAPPClass tha,
+        appVersion av
+        WHERE
+        app.devUserId = dev.id
+        AND app.statusId = st.id
+        AND app.frameId = fr.id
+        AND app.flatformId = ff.id
+        AND app.createdBy = devtwo.id
+        AND app.firstAPPClassId = fa.id
+        AND app.twoAPPClassId = ta.id
+        AND app.threeAPPClassId = tha.id
+        AND app.versionId = av.id
+        <if test="appId!=null and appId != 0">
+            AND app.id = #{appId,jdbcType=INTEGER}
+        </if>
+        <if test="softwareName != null and softwareName != '' ">
+            AND app.softwareName like ('%',#{softwareName},'%')
+        </if>
+        <if test="flatFormId != null and flatFormId != 0">
+            AND app.flatformId = #{flatformId}
+        </if>
+        <if test="firstAPPClassId != null and firstAPPClassId != 0">
+            AND app.firstAPPClassId = #{firstAPPClassId}
+        </if>
+        <if test="twoAPPClassId != null and twoAPPClassId != 0">
+            AND app.twoAPPClassId = #{twoAPPClassId}
+        </if>
+        <if test="threeAPPClassId != null and threeAPPClassId != 0">
+            AND app.threeAPPClassId = #{threeAPPClassId}
+        </if>
+        <if test="devUserId!=null and devUserId !=0 ">
+            AND app.devUserId = #{devUserId}
+        </if>
+        <if test="frameId != null and frameId != 0 ">
+            AND app.frameId = #{frameId}
+        </if>
+        <if test="statusId != null and statusId != 0 ">
+            AND app.statusId = #{statusId}
+        </if>
+    </select>
+
+    <select id="getAppInfoS" resultType="com.xuan.springappinfo.utils.entity.Storage">
+        SELECT
+        app.id "appId",
+        app.softwareName "softwareName",
+        app.APKName "APKName",
+        app.supportROM "supportROM",
+        app.interfaceLanguageId "interfaceLanguageId",
+        app.softwareSize "softwareSize",
+        app.updateDate "updateDate",
+        app.devUserId "devUserId",
+        app.appIntroduction "appIntroduction",
+        app.statusId "statusId",
+        app.frameId "frameId",
+        app.onSaleDate "onSaleDate",
+        app.offSaleDate "offSaleDate",
+        app.flatformId "flatformId",
+        app.downloads "downloads",
+        app.createdBy "createdBy",
+        app.creationDate "creationDate",
+        app.firstAPPClassId "firstAPPClassId",
+        app.twoAPPClassId "twoAPPClassId",
+        app.threeAPPClassId "threeAPPClassId",
+        app.logoPicPath "logoPicPath",
+        app.logoLocPath "logoLocPath",
+        app.versionId "versionId",
+        dev.devName "devUserName",
+        devtwo.devName "createByName",
+
+        st.statusType "statusType",
+        fr.frameType "frameType",
+        ff.flatformName "flatformName",
+        fa.firstAPPName "firstAPPName",
+        ta.twoAPPName "twoAPPName",
+        tha.threeAPPName "threeAPPName",
+        av.versionNo "versionNo"
+        FROM
+        appInfos app,
+        devUser dev,
+        devUser devtwo,
+        `STATUS` st,
+        frame fr,
+        flatform ff,
+        firstappclass fa,
+        twoAppClass ta,
+        threeAPPClass tha,
+        appVersion av
+        WHERE
+        app.devUserId = dev.id
+        AND app.statusId = st.id
+        AND app.frameId = fr.id
+        AND app.flatformId = ff.id
+        AND app.createdBy = devtwo.id
+        AND app.firstAPPClassId = fa.id
+        AND app.twoAPPClassId = ta.id
+        AND app.threeAPPClassId = tha.id
+        AND app.versionId = av.id
+        <if test="appId!=null and appId != 0">
+            AND app.id = #{appId,jdbcType=INTEGER}
+        </if>
+        <if test="softwareName != null and softwareName != '' ">
+            AND app.softwareName like ('%',#{softwareName},'%')
+        </if>
+        <if test="flatFormId != null and flatFormId != 0">
+            AND app.flatformId = #{flatFormId}
+        </if>
+        <if test="firstAPPClassId != null and firstAPPClassId != 0">
+            AND app.firstAPPClassId = #{firstAPPClassId}
+        </if>
+        <if test="twoAPPClassId != null and twoAPPClassId != 0">
+            AND app.twoAPPClassId = #{twoAPPClassId}
+        </if>
+        <if test="threeAPPClassId != null and threeAPPClassId != 0">
+            AND app.threeAPPClassId = #{threeAPPClassId}
+        </if>
+        LIMIT
+        #{currNo},#{size}
+    </select>
+
+    <select id="getAppInfoId" resultType="com.xuan.springappinfo.utils.entity.Storage">
+        SELECT
+        app.id "appId",
+        app.softwareName "softwareName",
+        app.APKName "APKName",
+        app.supportROM "supportROM",
+        app.interfaceLanguageId "interfaceLanguageId",
+        app.softwareSize "softwareSize",
+        app.updateDate "updateDate",
+        app.devUserId "devUserId",
+        app.appIntroduction "appIntroduction",
+        app.statusId "statusId",
+        app.frameId "frameId",
+        app.onSaleDate "onSaleDate",
+        app.offSaleDate "offSaleDate",
+        app.flatformId "flatformId",
+        app.downloads "downloads",
+        app.createdBy "createdBy",
+        app.creationDate "creationDate",
+        app.firstAPPClassId "firstAPPClassId",
+        app.twoAPPClassId "twoAPPClassId",
+        app.threeAPPClassId "threeAPPClassId",
+        app.logoPicPath "logoPicPath",
+        app.logoLocPath "logoLocPath",
+        app.versionId "versionId",
+        dev.devName "devUserName",
+        devtwo.devName "createByName",
+        st.statusType "statusType",
+        fr.frameType "frameType",
+        ff.flatformName "flatformName",
+        fa.firstAPPName "firstAPPName",
+        ta.twoAPPName "twoAPPName",
+        tha.threeAPPName "threeAPPName",
+        av.versionNo "versionNo"
+        FROM
+        appInfos app,
+        devUser dev,
+        devUser devtwo,
+        `STATUS` st,
+        frame fr,
+        flatform ff,
+        firstappclass fa,
+        twoAppClass ta,
+        threeAPPClass tha,
+        appVersion av
+        WHERE
+        app.devUserId = dev.id
+        AND app.statusId = st.id
+        AND app.frameId = fr.id
+        AND app.flatformId = ff.id
+        AND app.createdBy = devtwo.id
+        AND app.firstAPPClassId = fa.id
+        AND app.twoAPPClassId = ta.id
+        AND app.threeAPPClassId = tha.id
+        AND app.versionId = av.id
+        AND app.id = #{appId,jdbcType=INTEGER}
+    </select>
+
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from appinfos
+    where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="com.xuan.springappinfo.pojo.AppInfoS">
+    insert into appinfos (id, softwareName, APKName, 
+      supportROM, interfaceLanguageId, softwareSize, 
+      updateDate, devUserId, appIntroduction, 
+      statusId, frameId, onSaleDate, 
+      offSaleDate, flatformId, downloads, 
+      createdBy, creationDate, firstAPPClassId, 
+      twoAPPClassId, threeAPPClassId, logoPicPath, 
+      logoLocPath, versionId)
+    values (#{id,jdbcType=INTEGER}, #{softwarename,jdbcType=VARCHAR}, #{apkname,jdbcType=VARCHAR}, 
+      #{supportrom,jdbcType=VARCHAR}, #{interfacelanguageid,jdbcType=INTEGER}, #{softwaresize,jdbcType=DOUBLE}, 
+      #{updatedate,jdbcType=TIMESTAMP}, #{devuserid,jdbcType=INTEGER}, #{appintroduction,jdbcType=VARCHAR}, 
+      #{statusid,jdbcType=INTEGER}, #{frameid,jdbcType=INTEGER}, #{onsaledate,jdbcType=TIMESTAMP}, 
+      #{offsaledate,jdbcType=TIMESTAMP}, #{flatformid,jdbcType=INTEGER}, #{downloads,jdbcType=DOUBLE}, 
+      #{createdby,jdbcType=INTEGER}, #{creationdate,jdbcType=TIMESTAMP}, #{firstappclassid,jdbcType=INTEGER}, 
+      #{twoappclassid,jdbcType=INTEGER}, #{threeappclassid,jdbcType=INTEGER}, #{logopicpath,jdbcType=VARCHAR}, 
+      #{logolocpath,jdbcType=VARCHAR}, #{versionid,jdbcType=INTEGER})
+  </insert>
+
+    <insert id="insertSelective" parameterType="com.xuan.springappinfo.pojo.AppInfoS">
+        insert into appinfos
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="softwarename != null">
+                softwareName,
+            </if>
+            <if test="apkname != null">
+                APKName,
+            </if>
+            <if test="supportrom != null">
+                supportROM,
+            </if>
+            <if test="interfacelanguageid != null">
+                interfaceLanguageId,
+            </if>
+            <if test="softwaresize != null">
+                softwareSize,
+            </if>
+            <if test="updatedate != null">
+                updateDate,
+            </if>
+            <if test="devuserid != null">
+                devUserId,
+            </if>
+            <if test="appintroduction != null">
+                appIntroduction,
+            </if>
+            <if test="statusid != null">
+                statusId,
+            </if>
+            <if test="frameid != null">
+                frameId,
+            </if>
+            <if test="onsaledate != null">
+                onSaleDate,
+            </if>
+            <if test="offsaledate != null">
+                offSaleDate,
+            </if>
+            <if test="flatformid != null">
+                flatformId,
+            </if>
+            <if test="downloads != null">
+                downloads,
+            </if>
+            <if test="createdby != null">
+                createdBy,
+            </if>
+            <if test="creationdate != null">
+                creationDate,
+            </if>
+            <if test="firstappclassid != null">
+                firstAPPClassId,
+            </if>
+            <if test="twoappclassid != null">
+                twoAPPClassId,
+            </if>
+            <if test="threeappclassid != null">
+                threeAPPClassId,
+            </if>
+            <if test="logopicpath != null">
+                logoPicPath,
+            </if>
+            <if test="logolocpath != null">
+                logoLocPath,
+            </if>
+            <if test="versionid != null">
+                versionId,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="softwarename != null">
+                #{softwarename,jdbcType=VARCHAR},
+            </if>
+            <if test="apkname != null">
+                #{apkname,jdbcType=VARCHAR},
+            </if>
+            <if test="supportrom != null">
+                #{supportrom,jdbcType=VARCHAR},
+            </if>
+            <if test="interfacelanguageid != null">
+                #{interfacelanguageid,jdbcType=INTEGER},
+            </if>
+            <if test="softwaresize != null">
+                #{softwaresize,jdbcType=DOUBLE},
+            </if>
+            <if test="updatedate != null">
+                #{updatedate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="devuserid != null">
+                #{devuserid,jdbcType=INTEGER},
+            </if>
+            <if test="appintroduction != null">
+                #{appintroduction,jdbcType=VARCHAR},
+            </if>
+            <if test="statusid != null">
+                #{statusid,jdbcType=INTEGER},
+            </if>
+            <if test="frameid != null">
+                #{frameid,jdbcType=INTEGER},
+            </if>
+            <if test="onsaledate != null">
+                #{onsaledate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="offsaledate != null">
+                #{offsaledate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="flatformid != null">
+                #{flatformid,jdbcType=INTEGER},
+            </if>
+            <if test="downloads != null">
+                #{downloads,jdbcType=DOUBLE},
+            </if>
+            <if test="createdby != null">
+                #{createdby,jdbcType=INTEGER},
+            </if>
+            <if test="creationdate != null">
+                #{creationdate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="firstappclassid != null">
+                #{firstappclassid,jdbcType=INTEGER},
+            </if>
+            <if test="twoappclassid != null">
+                #{twoappclassid,jdbcType=INTEGER},
+            </if>
+            <if test="threeappclassid != null">
+                #{threeappclassid,jdbcType=INTEGER},
+            </if>
+            <if test="logopicpath != null">
+                #{logopicpath,jdbcType=VARCHAR},
+            </if>
+            <if test="logolocpath != null">
+                #{logolocpath,jdbcType=VARCHAR},
+            </if>
+            <if test="versionid != null">
+                #{versionid,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.xuan.springappinfo.pojo.AppInfoS">
+        update appinfos
+        <set>
+            <if test="softwarename != null">
+                softwareName = #{softwarename,jdbcType=VARCHAR},
+            </if>
+            <if test="apkname != null">
+                APKName = #{apkname,jdbcType=VARCHAR},
+            </if>
+            <if test="supportrom != null">
+                supportROM = #{supportrom,jdbcType=VARCHAR},
+            </if>
+            <if test="interfacelanguageid != null">
+                interfaceLanguageId = #{interfacelanguageid,jdbcType=INTEGER},
+            </if>
+            <if test="softwaresize != null">
+                softwareSize = #{softwaresize,jdbcType=DOUBLE},
+            </if>
+            <if test="updatedate != null">
+                updateDate = #{updatedate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="devuserid != null">
+                devUserId = #{devuserid,jdbcType=INTEGER},
+            </if>
+            <if test="appintroduction != null">
+                appIntroduction = #{appintroduction,jdbcType=VARCHAR},
+            </if>
+            <if test="statusid != null">
+                statusId = #{statusid,jdbcType=INTEGER},
+            </if>
+            <if test="frameid != null">
+                frameId = #{frameid,jdbcType=INTEGER},
+            </if>
+            <if test="onsaledate != null">
+                onSaleDate = #{onsaledate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="offsaledate != null">
+                offSaleDate = #{offsaledate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="flatformid != null">
+                flatformId = #{flatformid,jdbcType=INTEGER},
+            </if>
+            <if test="downloads != null">
+                downloads = #{downloads,jdbcType=DOUBLE},
+            </if>
+            <if test="createdby != null">
+                createdBy = #{createdby,jdbcType=INTEGER},
+            </if>
+            <if test="creationdate != null">
+                creationDate = #{creationdate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="firstappclassid != null">
+                firstAPPClassId = #{firstappclassid,jdbcType=INTEGER},
+            </if>
+            <if test="twoappclassid != null">
+                twoAPPClassId = #{twoappclassid,jdbcType=INTEGER},
+            </if>
+            <if test="threeappclassid != null">
+                threeAPPClassId = #{threeappclassid,jdbcType=INTEGER},
+            </if>
+            <if test="logopicpath != null">
+                logoPicPath = #{logopicpath,jdbcType=VARCHAR},
+            </if>
+            <if test="logolocpath != null">
+                logoLocPath = #{logolocpath,jdbcType=VARCHAR},
+            </if>
+            <if test="versionid != null">
+                versionId = #{versionid,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.xuan.springappinfo.pojo.AppInfoS">
+    update appinfos
+    set softwareName = #{softwarename,jdbcType=VARCHAR},
+      APKName = #{apkname,jdbcType=VARCHAR},
+      supportROM = #{supportrom,jdbcType=VARCHAR},
+      interfaceLanguageId = #{interfacelanguageid,jdbcType=INTEGER},
+      softwareSize = #{softwaresize,jdbcType=DOUBLE},
+      updateDate = #{updatedate,jdbcType=TIMESTAMP},
+      devUserId = #{devuserid,jdbcType=INTEGER},
+      appIntroduction = #{appintroduction,jdbcType=VARCHAR},
+      statusId = #{statusid,jdbcType=INTEGER},
+      frameId = #{frameid,jdbcType=INTEGER},
+      onSaleDate = #{onsaledate,jdbcType=TIMESTAMP},
+      offSaleDate = #{offsaledate,jdbcType=TIMESTAMP},
+      flatformId = #{flatformid,jdbcType=INTEGER},
+      downloads = #{downloads,jdbcType=DOUBLE},
+      createdBy = #{createdby,jdbcType=INTEGER},
+      creationDate = #{creationdate,jdbcType=TIMESTAMP},
+      firstAPPClassId = #{firstappclassid,jdbcType=INTEGER},
+      twoAPPClassId = #{twoappclassid,jdbcType=INTEGER},
+      threeAPPClassId = #{threeappclassid,jdbcType=INTEGER},
+      logoPicPath = #{logopicpath,jdbcType=VARCHAR},
+      logoLocPath = #{logolocpath,jdbcType=VARCHAR},
+      versionId = #{versionid,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+</mapper>

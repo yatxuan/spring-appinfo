@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xuan.springappinfo.mapper.FrameMapper" >
+  <resultMap id="BaseResultMap" type="com.xuan.springappinfo.pojo.Frame" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="frameType" property="frametype" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, frameType
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from frame
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from frame
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xuan.springappinfo.pojo.Frame" >
+    insert into frame (id, frameType)
+    values (#{id,jdbcType=INTEGER}, #{frametype,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xuan.springappinfo.pojo.Frame" >
+    insert into frame
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="frametype != null" >
+        frameType,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="frametype != null" >
+        #{frametype,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xuan.springappinfo.pojo.Frame" >
+    update frame
+    <set >
+      <if test="frametype != null" >
+        frameType = #{frametype,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xuan.springappinfo.pojo.Frame" >
+    update frame
+    set frameType = #{frametype,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

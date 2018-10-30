@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xuan.springappinfo.mapper.AppVersionMapper" >
+  <resultMap id="BaseResultMap" type="com.xuan.springappinfo.pojo.AppVersion" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="appInfoId" property="appinfoid" jdbcType="INTEGER" />
+    <result column="versionNo" property="versionno" jdbcType="VARCHAR" />
+    <result column="versionInfo" property="versioninfo" jdbcType="VARCHAR" />
+    <result column="releaseStatusId" property="releasestatusid" jdbcType="INTEGER" />
+    <result column="downloadLink" property="downloadlink" jdbcType="VARCHAR" />
+    <result column="versionSize" property="versionsize" jdbcType="DOUBLE" />
+    <result column="modifyBy" property="modifyby" jdbcType="INTEGER" />
+    <result column="modifyDate" property="modifydate" jdbcType="TIMESTAMP" />
+    <result column="apkLocPath" property="apklocpath" jdbcType="VARCHAR" />
+    <result column="apkFileName" property="apkfilename" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, appInfoId, versionNo, versionInfo, releaseStatusId, downloadLink, versionSize, 
+    modifyBy, modifyDate, apkLocPath, apkFileName
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from appversion
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from appversion
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xuan.springappinfo.pojo.AppVersion" >
+    insert into appversion (id, appInfoId, versionNo, 
+      versionInfo, releaseStatusId, downloadLink, 
+      versionSize, modifyBy, modifyDate, 
+      apkLocPath, apkFileName)
+    values (#{id,jdbcType=INTEGER}, #{appinfoid,jdbcType=INTEGER}, #{versionno,jdbcType=VARCHAR}, 
+      #{versioninfo,jdbcType=VARCHAR}, #{releasestatusid,jdbcType=INTEGER}, #{downloadlink,jdbcType=VARCHAR}, 
+      #{versionsize,jdbcType=DOUBLE}, #{modifyby,jdbcType=INTEGER}, #{modifydate,jdbcType=TIMESTAMP}, 
+      #{apklocpath,jdbcType=VARCHAR}, #{apkfilename,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xuan.springappinfo.pojo.AppVersion" >
+    insert into appversion
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="appinfoid != null" >
+        appInfoId,
+      </if>
+      <if test="versionno != null" >
+        versionNo,
+      </if>
+      <if test="versioninfo != null" >
+        versionInfo,
+      </if>
+      <if test="releasestatusid != null" >
+        releaseStatusId,
+      </if>
+      <if test="downloadlink != null" >
+        downloadLink,
+      </if>
+      <if test="versionsize != null" >
+        versionSize,
+      </if>
+      <if test="modifyby != null" >
+        modifyBy,
+      </if>
+      <if test="modifydate != null" >
+        modifyDate,
+      </if>
+      <if test="apklocpath != null" >
+        apkLocPath,
+      </if>
+      <if test="apkfilename != null" >
+        apkFileName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="appinfoid != null" >
+        #{appinfoid,jdbcType=INTEGER},
+      </if>
+      <if test="versionno != null" >
+        #{versionno,jdbcType=VARCHAR},
+      </if>
+      <if test="versioninfo != null" >
+        #{versioninfo,jdbcType=VARCHAR},
+      </if>
+      <if test="releasestatusid != null" >
+        #{releasestatusid,jdbcType=INTEGER},
+      </if>
+      <if test="downloadlink != null" >
+        #{downloadlink,jdbcType=VARCHAR},
+      </if>
+      <if test="versionsize != null" >
+        #{versionsize,jdbcType=DOUBLE},
+      </if>
+      <if test="modifyby != null" >
+        #{modifyby,jdbcType=INTEGER},
+      </if>
+      <if test="modifydate != null" >
+        #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="apklocpath != null" >
+        #{apklocpath,jdbcType=VARCHAR},
+      </if>
+      <if test="apkfilename != null" >
+        #{apkfilename,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xuan.springappinfo.pojo.AppVersion" >
+    update appversion
+    <set >
+      <if test="appinfoid != null" >
+        appInfoId = #{appinfoid,jdbcType=INTEGER},
+      </if>
+      <if test="versionno != null" >
+        versionNo = #{versionno,jdbcType=VARCHAR},
+      </if>
+      <if test="versioninfo != null" >
+        versionInfo = #{versioninfo,jdbcType=VARCHAR},
+      </if>
+      <if test="releasestatusid != null" >
+        releaseStatusId = #{releasestatusid,jdbcType=INTEGER},
+      </if>
+      <if test="downloadlink != null" >
+        downloadLink = #{downloadlink,jdbcType=VARCHAR},
+      </if>
+      <if test="versionsize != null" >
+        versionSize = #{versionsize,jdbcType=DOUBLE},
+      </if>
+      <if test="modifyby != null" >
+        modifyBy = #{modifyby,jdbcType=INTEGER},
+      </if>
+      <if test="modifydate != null" >
+        modifyDate = #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="apklocpath != null" >
+        apkLocPath = #{apklocpath,jdbcType=VARCHAR},
+      </if>
+      <if test="apkfilename != null" >
+        apkFileName = #{apkfilename,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xuan.springappinfo.pojo.AppVersion" >
+    update appversion
+    set appInfoId = #{appinfoid,jdbcType=INTEGER},
+      versionNo = #{versionno,jdbcType=VARCHAR},
+      versionInfo = #{versioninfo,jdbcType=VARCHAR},
+      releaseStatusId = #{releasestatusid,jdbcType=INTEGER},
+      downloadLink = #{downloadlink,jdbcType=VARCHAR},
+      versionSize = #{versionsize,jdbcType=DOUBLE},
+      modifyBy = #{modifyby,jdbcType=INTEGER},
+      modifyDate = #{modifydate,jdbcType=TIMESTAMP},
+      apkLocPath = #{apklocpath,jdbcType=VARCHAR},
+      apkFileName = #{apkfilename,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

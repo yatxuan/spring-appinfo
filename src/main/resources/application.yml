@@ -1,0 +1,46 @@
+server:
+  port: 9999
+  servlet:
+    session:
+      timeout: 3600S
+
+spring:
+# MySQL 数据库连接信息
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/appinfo?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
+    username: root
+    password: 123
+# redis 数据库连接信息
+  redis:
+    host: 127.0.0.1
+    database: 0
+    port: 6379
+    jedis:
+      pool:
+        max-active: 30
+        max-idle: 8
+        max-wait: -1m
+    timeout: 5000m
+
+mybatis:
+  mapper-locations: classpath:mapping/*.xml
+  type-aliases-package: com.xuan.springappinfo.pojo
+
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+  page-size-zero: true
+
+
+logging:
+  level:
+    com.xuan.springappinfo.mapper: debug
+
+json:
+  class-type: json
+
+
+

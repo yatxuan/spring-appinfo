@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xuan.springappinfo.mapper.FirstAPPClassMapper" >
+  <resultMap id="BaseResultMap" type="com.xuan.springappinfo.pojo.FirstAPPClass" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="firstAPPName" property="firstappname" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, firstAPPName
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from firstappclass
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from firstappclass
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xuan.springappinfo.pojo.FirstAPPClass" >
+    insert into firstappclass (id, firstAPPName)
+    values (#{id,jdbcType=INTEGER}, #{firstappname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xuan.springappinfo.pojo.FirstAPPClass" >
+    insert into firstappclass
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="firstappname != null" >
+        firstAPPName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="firstappname != null" >
+        #{firstappname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xuan.springappinfo.pojo.FirstAPPClass" >
+    update firstappclass
+    <set >
+      <if test="firstappname != null" >
+        firstAPPName = #{firstappname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xuan.springappinfo.pojo.FirstAPPClass" >
+    update firstappclass
+    set firstAPPName = #{firstappname,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

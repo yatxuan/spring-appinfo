@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xuan.springappinfo.mapper.DevUserMapper" >
+  <resultMap id="BaseResultMap" type="com.xuan.springappinfo.pojo.DevUser" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="devCode" property="devcode" jdbcType="VARCHAR" />
+    <result column="devName" property="devname" jdbcType="VARCHAR" />
+    <result column="devPassword" property="devpassword" jdbcType="VARCHAR" />
+    <result column="devEmail" property="devemail" jdbcType="VARCHAR" />
+    <result column="devInfo" property="devinfo" jdbcType="VARCHAR" />
+    <result column="creationDate" property="creationdate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, devCode, devName, devPassword, devEmail, devInfo, creationDate
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from devuser
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from devuser
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xuan.springappinfo.pojo.DevUser" >
+    insert into devuser (id, devCode, devName, 
+      devPassword, devEmail, devInfo, 
+      creationDate)
+    values (#{id,jdbcType=INTEGER}, #{devcode,jdbcType=VARCHAR}, #{devname,jdbcType=VARCHAR}, 
+      #{devpassword,jdbcType=VARCHAR}, #{devemail,jdbcType=VARCHAR}, #{devinfo,jdbcType=VARCHAR}, 
+      #{creationdate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xuan.springappinfo.pojo.DevUser" >
+    insert into devuser
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="devcode != null" >
+        devCode,
+      </if>
+      <if test="devname != null" >
+        devName,
+      </if>
+      <if test="devpassword != null" >
+        devPassword,
+      </if>
+      <if test="devemail != null" >
+        devEmail,
+      </if>
+      <if test="devinfo != null" >
+        devInfo,
+      </if>
+      <if test="creationdate != null" >
+        creationDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="devcode != null" >
+        #{devcode,jdbcType=VARCHAR},
+      </if>
+      <if test="devname != null" >
+        #{devname,jdbcType=VARCHAR},
+      </if>
+      <if test="devpassword != null" >
+        #{devpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="devemail != null" >
+        #{devemail,jdbcType=VARCHAR},
+      </if>
+      <if test="devinfo != null" >
+        #{devinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="creationdate != null" >
+        #{creationdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xuan.springappinfo.pojo.DevUser" >
+    update devuser
+    <set >
+      <if test="devcode != null" >
+        devCode = #{devcode,jdbcType=VARCHAR},
+      </if>
+      <if test="devname != null" >
+        devName = #{devname,jdbcType=VARCHAR},
+      </if>
+      <if test="devpassword != null" >
+        devPassword = #{devpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="devemail != null" >
+        devEmail = #{devemail,jdbcType=VARCHAR},
+      </if>
+      <if test="devinfo != null" >
+        devInfo = #{devinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="creationdate != null" >
+        creationDate = #{creationdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xuan.springappinfo.pojo.DevUser" >
+    update devuser
+    set devCode = #{devcode,jdbcType=VARCHAR},
+      devName = #{devname,jdbcType=VARCHAR},
+      devPassword = #{devpassword,jdbcType=VARCHAR},
+      devEmail = #{devemail,jdbcType=VARCHAR},
+      devInfo = #{devinfo,jdbcType=VARCHAR},
+      creationDate = #{creationdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

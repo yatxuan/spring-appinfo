@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xuan.springappinfo.mapper.BackendUserMapper" >
+  <resultMap id="BaseResultMap" type="com.xuan.springappinfo.pojo.BackendUser" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="userCode" property="usercode" jdbcType="VARCHAR" />
+    <result column="userPassword" property="userpassword" jdbcType="VARCHAR" />
+    <result column="userName" property="username" jdbcType="VARCHAR" />
+    <result column="creationDate" property="creationdate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, userCode, userPassword, userName, creationDate
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from backenduser
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from backenduser
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xuan.springappinfo.pojo.BackendUser" >
+    insert into backenduser (id, userCode, userPassword, 
+      userName, creationDate)
+    values (#{id,jdbcType=INTEGER}, #{usercode,jdbcType=VARCHAR}, #{userpassword,jdbcType=VARCHAR}, 
+      #{username,jdbcType=VARCHAR}, #{creationdate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xuan.springappinfo.pojo.BackendUser" >
+    insert into backenduser
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="usercode != null" >
+        userCode,
+      </if>
+      <if test="userpassword != null" >
+        userPassword,
+      </if>
+      <if test="username != null" >
+        userName,
+      </if>
+      <if test="creationdate != null" >
+        creationDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="usercode != null" >
+        #{usercode,jdbcType=VARCHAR},
+      </if>
+      <if test="userpassword != null" >
+        #{userpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="creationdate != null" >
+        #{creationdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xuan.springappinfo.pojo.BackendUser" >
+    update backenduser
+    <set >
+      <if test="usercode != null" >
+        userCode = #{usercode,jdbcType=VARCHAR},
+      </if>
+      <if test="userpassword != null" >
+        userPassword = #{userpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        userName = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="creationdate != null" >
+        creationDate = #{creationdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xuan.springappinfo.pojo.BackendUser" >
+    update backenduser
+    set userCode = #{usercode,jdbcType=VARCHAR},
+      userPassword = #{userpassword,jdbcType=VARCHAR},
+      userName = #{username,jdbcType=VARCHAR},
+      creationDate = #{creationdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
