@@ -25,18 +25,18 @@ public class DevUserServiceImpl implements DevUserService {
     /**
      * 储存在redis里的key
      */
-    private final String name = "devUserList";
+    private final static String REDISKEY = "devUserList";
 
     @Override
     public Result getDevUsers() {
 
         List<DevUser> devUserList;
 
-        if (redisService.exists(name)) {
-            devUserList = redisService.getList(name);
+        if (redisService.exists(REDISKEY)) {
+            devUserList = redisService.getList(REDISKEY);
         } else {
             devUserList = devUserMapper.getDevUsers();
-            redisService.setList(name, devUserList);
+            redisService.setList(REDISKEY, devUserList);
         }
 
         return Result.getClass(devUserList);

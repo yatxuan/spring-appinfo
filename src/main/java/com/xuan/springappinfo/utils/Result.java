@@ -117,14 +117,6 @@ public class Result {
         }
     }
 
-    public static Result getInt(int count) {
-        if (count != 0) {
-            return new Result(ResultCode.SUCCESS, count);
-        } else {
-            return getFailure();
-        }
-    }
-
     /**
      * 自定义返回报错信息
      *

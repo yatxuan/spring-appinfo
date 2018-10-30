@@ -26,7 +26,7 @@ public class AppVersionServiceImpl implements AppVersionService {
     /**
      * 储存在redis里的key
      */
-    private final String name = "appVersionList";
+    private final static String REDISKEY = "appVersionList";
     private List<AppVersion> appVersionList = new ArrayList<>();
 
     @Override
@@ -35,11 +35,11 @@ public class AppVersionServiceImpl implements AppVersionService {
 
         if (appVuersion > 0) {
 
-            if (redisService.exists(name)) {
-                appVersionList = redisService.getList(name);
+            if (redisService.exists(REDISKEY)) {
+                appVersionList = redisService.getList(REDISKEY);
                 appVersionList.add(appVersion);
             }
-            redisService.setList(name, appVersionList);
+            redisService.setList(REDISKEY, appVersionList);
 
             return Result.getSuccess();
         }
@@ -49,11 +49,11 @@ public class AppVersionServiceImpl implements AppVersionService {
     @Override
     public Result getAppVersionS(int id) {
 
-        if (redisService.exists(name)) {
-            appVersionList = redisService.getList(name);
+        if (redisService.exists(REDISKEY)) {
+            appVersionList = redisService.getList(REDISKEY);
         } else {
             appVersionList = appVersionMapper.getAppVersionS(id);
-            redisService.setList(name, appVersionList);
+            redisService.setList(REDISKEY, appVersionList);
         }
 
         return Result.getList(appVersionList);

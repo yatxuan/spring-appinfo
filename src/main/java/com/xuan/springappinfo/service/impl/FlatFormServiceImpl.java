@@ -29,18 +29,18 @@ public class FlatFormServiceImpl implements FlatFormService {
     /**
      * 储存在redis里的key
      */
-    private final String name = "flatFormList";
+   private final static String REDISKEY = "flatFormList";
 
     @Override
     public List<FlatForm> getFlatForm() {
         List<FlatForm> flatFormList;
 
-        if (redisService.exists(name)) {
-            return redisService.getList(name);
+        if (redisService.exists(REDISKEY)) {
+            return redisService.getList(REDISKEY);
         }
 
         flatFormList = flatFormMapper.getFlatForm();
-        redisService.setList(name, flatFormList);
+        redisService.setList(REDISKEY, flatFormList);
         return flatFormList;
     }
 }

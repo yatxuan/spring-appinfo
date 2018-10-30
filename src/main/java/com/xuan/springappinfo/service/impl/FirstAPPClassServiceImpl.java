@@ -28,18 +28,18 @@ public class FirstAPPClassServiceImpl implements FirstAPPClassService {
     /**
      * 储存在redis里的key
      */
-    private final String name = "firstAPPClassList";
+    private final static String REDISREDISKEY = "firstAPPClassList";
 
     @Override
     public List<FirstAPPClass> getFirstAPPClass() {
         List<FirstAPPClass> firstAPPClassList;
 
-        if (redisService.exists(name)) {
-            return redisService.getList(name);
+        if (redisService.exists(REDISREDISKEY)) {
+            return redisService.getList(REDISREDISKEY);
         }
 
         firstAPPClassList = firstAPPClassMapper.getFirstAPPClass();
-        redisService.setList(name, firstAPPClassList);
+        redisService.setList(REDISREDISKEY, firstAPPClassList);
         return firstAPPClassList;
     }
 }
