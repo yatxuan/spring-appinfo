@@ -1,15 +1,12 @@
 package com.xuan.springappinfo.controller;
 
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.Appinfo;
 import com.xuan.springappinfo.pojo.AppInfoS;
-import com.xuan.springappinfo.pojo.AppVersion;
 import com.xuan.springappinfo.service.AppInfoSService;
 import com.xuan.springappinfo.utils.entity.Condition;
 import com.xuan.springappinfo.utils.Page;
 import com.xuan.springappinfo.utils.Result;
 import com.xuan.springappinfo.utils.entity.Storage;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
