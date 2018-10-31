@@ -35,11 +35,11 @@ public class AppVersionServiceImpl implements AppVersionService {
 
         if (appVuersion > 0) {
 
-            if (redisService.exists(REDISKEY)) {
-                appVersionList = redisService.getList(REDISKEY);
+            if (redisService.exists(REDISKEY + appVersion.getAppinfoid())) {
+                appVersionList = redisService.getList(REDISKEY + appVersion.getAppinfoid());
                 appVersionList.add(appVersion);
             }
-            redisService.setList(REDISKEY, appVersionList);
+            redisService.setList(REDISKEY + appVersion.getAppinfoid(), appVersionList);
 
             return Result.getSuccess();
         }
@@ -47,15 +47,16 @@ public class AppVersionServiceImpl implements AppVersionService {
     }
 
     @Override
-    public Result getAppVersionS(int id) {
+    public Result getAppVersionS(int appId) {
 
-        if (redisService.exists(REDISKEY)) {
-            appVersionList = redisService.getList(REDISKEY);
+        if (redisService.exists(REDISKEY + appId)) {
+            appVersionList = redisService.getList(REDISKEY + appId);
         } else {
-            appVersionList = appVersionMapper.getAppVersionS(id);
-            redisService.setList(REDISKEY, appVersionList);
+            appVersionList = appVersionMapper.getAppVersionS(appId);
+            if (appVersionList.size() > 0) {
+                redisService.setList(REDISKEY + appId, appVersionList);
+            }
         }
-
         return Result.getList(appVersionList);
     }
 }

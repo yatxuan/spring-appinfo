@@ -2,13 +2,13 @@ package com.xuan.springappinfo.service.impl;
 
 import com.xuan.springappinfo.mapper.AppInfoSMapper;
 import com.xuan.springappinfo.pojo.AppInfoS;
-import com.xuan.springappinfo.pojo.AppVersion;
 import com.xuan.springappinfo.service.AppInfoSService;
+import com.xuan.springappinfo.utils.Page;
 import com.xuan.springappinfo.utils.Result;
 import com.xuan.springappinfo.utils.entity.Condition;
-import com.xuan.springappinfo.utils.Page;
 import com.xuan.springappinfo.utils.entity.Storage;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -57,6 +57,7 @@ public class AppInfoSServiceImpl implements AppInfoSService {
     }
 
     @Override
+    @Transactional
     public Result updateAppinfoS(AppInfoS appInfoS) {
         int selective = appInfoSMapper.updateByPrimaryKeySelective(appInfoS);
         if (selective > 0) {

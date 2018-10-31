@@ -28,11 +28,11 @@ public class AppInfoSController {
     private AppInfoSService appInfoSService;
 
     /**
+     * @return com.xuan.springappinfo.utils.Result
      * @Author YatXuan
      * @Description 多条件查询APP基本信息
      * @Date 15:00 2018/10/29 0029
      * @Param [condition]
-     * @return com.xuan.springappinfo.utils.Result
      **/
 
     @RequestMapping("/getAppInfoS")
@@ -45,11 +45,11 @@ public class AppInfoSController {
     }
 
     /**
+     * @return com.xuan.springappinfo.utils.Result
      * @Author YatXuan
      * @Description 新增APP信息
      * @Date 15:00 2018/10/29 0029
      * @Param [appInfoS]
-     * @return com.xuan.springappinfo.utils.Result
      **/
     @RequestMapping("/saveAppInfo")
     public Result saveAppInfo(AppInfoS appInfoS) {
@@ -59,66 +59,67 @@ public class AppInfoSController {
     }
 
     /**
+     * @return com.xuan.springappinfo.utils.Result
      * @Author YatXuan
      * @Description 修改APP信息
      * @Date 15:01 2018/10/29 0029
      * @Param [appInfoS]
-     * @return com.xuan.springappinfo.utils.Result
      **/
     @RequestMapping("/updateAppinfoS")
-    public Result updateAppinfoS(AppInfoS appInfoS){
+    public Result updateAppinfoS(AppInfoS appInfoS) {
         return appInfoSService.updateAppinfoS(appInfoS);
     }
 
-
     /**
+     * @return com.xuan.springappinfo.utils.Result
      * @Author YatXuan
      * @Description 通过id查询APP信息
      * @Date 15:06 2018/10/29 0029
      * @Param [id]
-     * @return com.xuan.springappinfo.utils.Result
      **/
     @RequestMapping("/getAppInfoId")
-    public Result getAppInfoId(Integer id){
+    public Result getAppInfoId(Integer id) {
         return appInfoSService.getAppInfoId(id);
     }
 
     /**
+     * @return
      * @Author YatXuan
      * @Description 查询是否能修改APP的版本号
      * @Date 15:56 2018/10/29 0029
      * @Param
-     * @return
      **/
     @RequestMapping("/getAppinfoVersion")
-    public Result getAppinfoVersion(Integer id){
+    public Result getAppinfoVersion(Integer id) {
         return appInfoSService.getAppinfoVersion(id);
     }
 
     /**
      * 功能描述: <br>
      * 〈查询是否能修改APP的基本信息〉
+     *
+     * @return
      * @Author Yat-Xuan
      * @Description //TODO ASUS
      * @Date 2018/10/27 15:57
      * @Param
-     * @return
      **/
-    public Result getAppinfo(int id){
+    public Result getAppinfo(int id) {
         return appInfoSService.getAppinfo(id);
     }
 
     /**
      * 审核APP
+     *
+     * @return com.xuan.springappinfo.utils.Result
      * @Author YatXuan
      * @Description //TODO
      * @Date 16:45 2018/10/29 0029
      * @Param [appId, statusId]
-     * @return com.xuan.springappinfo.utils.Result
      **/
 
     @RequestMapping("/updateAppStatus")
-    public Result updateAppStatus(AppInfoS appInfoS){
+    public Result updateAppStatus(AppInfoS appInfoS) {
         return appInfoSService.updateAppStatus(appInfoS);
     }
 }

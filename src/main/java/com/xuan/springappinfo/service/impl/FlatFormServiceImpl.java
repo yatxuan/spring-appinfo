@@ -7,7 +7,6 @@ import com.xuan.springappinfo.utils.redis.RedisService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -40,7 +39,9 @@ public class FlatFormServiceImpl implements FlatFormService {
         }
 
         flatFormList = flatFormMapper.getFlatForm();
-        redisService.setList(REDISKEY, flatFormList);
+        if (flatFormList.size()>0) {
+            redisService.setList(REDISKEY, flatFormList);
+        }
         return flatFormList;
     }
 }

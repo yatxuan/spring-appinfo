@@ -23,5 +23,5 @@ public interface AppVersionService {
      * @Param
      * @return
      **/
-    Result getAppVersionS(int id);
+    Result getAppVersionS(int appId);
 }

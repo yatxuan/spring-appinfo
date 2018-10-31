@@ -2,14 +2,12 @@ package com.xuan.springappinfo.utils.shiro;
 
 import com.xuan.springappinfo.utils.shiro.filter.RolesOrFilter;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
-
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import javax.servlet.Filter;
 import java.util.LinkedHashMap;
@@ -35,7 +33,7 @@ public class ShiroBean {
 
         // 拦截器.
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
-        filterChainDefinitionMap.put("/backendUser/getBackendUser", "anon");
+        filterChainDefinitionMap.put("/login/getuser", "anon");
 //        filterChainDefinitionMap.put("/getIndex", "anon");
 //        filterChainDefinitionMap.put("/getIndex", "rolesOr[admin,admin1]");
         filterChainDefinitionMap.put("/**", "authc");

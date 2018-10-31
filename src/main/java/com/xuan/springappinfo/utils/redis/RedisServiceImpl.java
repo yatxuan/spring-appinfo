@@ -147,7 +147,7 @@ public class RedisServiceImpl implements RedisService {
      * @Param [key, value]
      **/
     @Override
-    public <T> boolean setClass(String key,  Class<T> value) {
+    public  boolean setClass(String key,  Object value) {
         return set(key, JSONObject.toJSONString(value));
     }
 

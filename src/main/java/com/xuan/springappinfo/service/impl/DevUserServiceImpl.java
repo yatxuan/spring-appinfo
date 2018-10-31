@@ -36,7 +36,9 @@ public class DevUserServiceImpl implements DevUserService {
             devUserList = redisService.getList(REDISKEY);
         } else {
             devUserList = devUserMapper.getDevUsers();
-            redisService.setList(REDISKEY, devUserList);
+            if (devUserList.size()>0) {
+                redisService.setList(REDISKEY, devUserList);
+            }
         }
 
         return Result.getClass(devUserList);

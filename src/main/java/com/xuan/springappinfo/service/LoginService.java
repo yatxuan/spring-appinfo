@@ -21,7 +21,7 @@ public interface LoginService {
      * @Param [userCode] 用户名
      * @return java.lang.String
      **/
-    String getBackendUser(String userCode);
+    String getUser(String userCode);
 
     /**
      * 功能描述: <br>

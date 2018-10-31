@@ -1,11 +1,8 @@
 package com.xuan.springappinfo.controller;
 
-import com.xuan.springappinfo.pojo.BackendUser;
-import com.xuan.springappinfo.utils.Result;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.subject.Subject;
-import org.springframework.web.bind.annotation.*;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 
 /**
@@ -18,20 +15,7 @@ import org.springframework.web.bind.annotation.*;
  **/
 @RestController
 @RequestMapping("/backendUser")
+@Slf4j
 public class BackendUserController {
-
-
-    @RequestMapping("/getBackendUser")
-    public Result getBackendUser(BackendUser backendUser) {
-
-        Subject subject = SecurityUtils.getSubject();
-        UsernamePasswordToken token = new UsernamePasswordToken(backendUser.getUsercode(), backendUser.getUserpassword());
-
-        subject.login(token);
-        subject.getSession().setAttribute("user",backendUser);
-
-        return Result.getSuccess();
-
-    }
 
 }

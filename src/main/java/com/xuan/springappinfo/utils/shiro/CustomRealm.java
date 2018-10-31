@@ -1,8 +1,5 @@
 package com.xuan.springappinfo.utils.shiro;
 
-import com.xuan.springappinfo.mapper.BackendUserMapper;
-import com.xuan.springappinfo.mapper.RolesRelationMapper;
-import com.xuan.springappinfo.pojo.BackendUser;
 import com.xuan.springappinfo.service.LoginService;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -112,7 +109,7 @@ public class CustomRealm extends AuthorizingRealm {
      */
     private String getPassWordByUserName(String userName) {
 
-        return loginService.getBackendUser(userName);
+        return loginService.getUser(userName);
     }
 
 

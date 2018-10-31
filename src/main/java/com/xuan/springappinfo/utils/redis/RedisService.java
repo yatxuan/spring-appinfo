@@ -64,7 +64,7 @@ public interface RedisService {
      * @Date 14:42 2018/10/30 0030
      * @Param [key, value]
      **/
-    <T> boolean setClass(String key,  Class<T> value);
+     boolean setClass(String key,  Object value);
 
     /**
      * 取出 类

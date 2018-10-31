@@ -26,9 +26,17 @@ public class AppVersionController {
         return appVersionService.saveAppVersion(appVersion);
     }
 
+    /**通过APP的id查询它所有的版本信息
+     * @Author YatXuan
+     * @Description //TODO
+     * @Date 14:07 2018/10/31 0031
+     * @Param [appId]
+     * @return com.xuan.springappinfo.utils.Result
+     **/
+
     @RequestMapping("/getAppVersionS")
-    public Result getAppVersionS(int id) {
-        return appVersionService.getAppVersionS(id);
+    public Result getAppVersionS(int appId) {
+        return appVersionService.getAppVersionS(appId);
     }
 
 }

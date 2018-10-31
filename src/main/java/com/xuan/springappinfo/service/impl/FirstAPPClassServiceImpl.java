@@ -39,7 +39,9 @@ public class FirstAPPClassServiceImpl implements FirstAPPClassService {
         }
 
         firstAPPClassList = firstAPPClassMapper.getFirstAPPClass();
-        redisService.setList(REDISREDISKEY, firstAPPClassList);
+        if (firstAPPClassList.size()>0) {
+            redisService.setList(REDISREDISKEY, firstAPPClassList);
+        }
         return firstAPPClassList;
     }
 }
