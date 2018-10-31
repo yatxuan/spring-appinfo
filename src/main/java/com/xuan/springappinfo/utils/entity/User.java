@@ -17,7 +17,7 @@ public class User {
     private String code;
     private String passWord;
     private String name;
-    private Integer roles;
+    private String roles;
 
 
 }

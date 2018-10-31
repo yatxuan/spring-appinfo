@@ -58,44 +58,35 @@ public interface RedisService {
     /**
      * 存放 类
      *
-     * @return boolean
-     * @Author YatXuan
-     * @Description //TODO
-     * @Date 14:42 2018/10/30 0030
-     * @Param [key, value]
-     **/
-     boolean setClass(String key,  Object value);
+     * @author Yat-Xuan
+     * @DESCRIPTION:
+     * @params: [key, value]
+     * @return: boolean
+     * @Date: 2018/10/31 0031 19:31
+     * @Modified By:
+     */
+    boolean setClass(String key, Object value);
 
-    /**
-     * 取出 类
-     *
-     * @return
-     * @Author YatXuan
-     * @Description //TODO
-     * @Date 14:43 2018/10/30 0030
-     * @Param
-     **/
+    /**  */
     <T> T getClazz(String key, Class<T> clazz);
 
     /**
-     * 存放list集合
-     *
-     * @return boolean
-     * @Author YatXuan
-     * @Description //TODO
-     * @Date 15:10 2018/10/30 0030
-     * @Param [key, list]
-     **/
+     * <p>Description: 存放list集合 </p>
+     * @author Yat-Xuan
+     * @params: [key, list]
+     * @return: boolean
+     * @Date: 2018/10/31 0031 19:48
+     * @Modified By:
+    */
     <T> boolean setList(String key, List<T> list);
 
     /**
-     * 取出list集合
-     *
-     * @return java.util.List<java.lang.Object>
-     * @Author YatXuan
-     * @Description //TODO
-     * @Date 15:10 2018/10/30 0030
-     * @Param [key]
-     **/
+     * @author Yat-Xuan
+     * @DESCRIPTION: 描述
+     * @params: [key]
+     * @return: java.util.List<T>
+     * @Date: 2018/10/31 0031 19:45
+     * @Modified By:
+    */
     <T> List<T> getList(String key);
 }

@@ -1,18 +1,15 @@
 package com.xuan.springappinfo.utils.shiro;
 
 import com.xuan.springappinfo.utils.Result;
-import org.apache.shiro.authc.*;
+import org.apache.shiro.authc.ExcessiveAttemptsException;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.LockedAccountException;
+import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.pam.UnsupportedTokenException;
 import org.apache.shiro.authz.AuthorizationException;
-import org.apache.shiro.authz.UnauthenticatedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * 公共异常类
@@ -55,12 +52,6 @@ public class ShiroException {
     public @ResponseBody
     Result ExcessiveAttemptsException() {
         return Result.getCustomize(false, -1, "认证次数超过限制");
-    }
-
-    @ExceptionHandler(value = Exception.class)
-    public @ResponseBody
-    Result Exception() {
-        return Result.getCustomize(false, -1, "其他异常");
     }
 
 }

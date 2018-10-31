@@ -66,6 +66,7 @@ public class AppInfoSServiceImpl implements AppInfoSService {
         return Result.getFailure();
     }
 
+
     @Override
     public Result getAppInfoId(Integer id) {
         Storage storage = appInfoSMapper.getAppInfoId(id);
