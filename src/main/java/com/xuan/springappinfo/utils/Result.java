@@ -110,7 +110,7 @@ public class Result {
     }
 
     /**
-     * 自定义返回报错信息
+     * 自定义返回信息
      *
      * @param success
      * @param code

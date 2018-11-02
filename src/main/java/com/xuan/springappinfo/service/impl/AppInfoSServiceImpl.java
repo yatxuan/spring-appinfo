@@ -7,6 +7,7 @@ import com.xuan.springappinfo.utils.Page;
 import com.xuan.springappinfo.utils.Result;
 import com.xuan.springappinfo.utils.entity.Condition;
 import com.xuan.springappinfo.utils.entity.Storage;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +25,7 @@ import java.util.Map;
  * @Time: 16:05
  */
 @Service("appInfoSService")
+@Slf4j
 public class AppInfoSServiceImpl implements AppInfoSService {
 
     @Resource
@@ -83,10 +85,12 @@ public class AppInfoSServiceImpl implements AppInfoSService {
     public Result getAppinfoVersion(Integer id) {
         Storage storage = appInfoSMapper.getAppInfoId(id);
         if (storage.getVersionId() <= 0) {
+            log.info("该APP没有版本信息，请先新增版本信息");
             return Result.getCustomize(false, -1, "该APP没有版本信息，请先新增版本信息");
         }
 
         if (storage.getFrameId() == 2) {
+            log.info("该APP状态为【已上架】，只能新增版本信息");
             return Result.getCustomize(false, -1, "该APP状态为【已上架】，只能新增版本信息");
         }
 
@@ -98,6 +102,7 @@ public class AppInfoSServiceImpl implements AppInfoSService {
         Storage storage = appInfoSMapper.getAppInfoId(id);
 
         if (storage.getStatusId() == 2) {
+            log.info("该APP已审核通过，不能修改信息");
             return Result.getCustomize(false, -1, "该APP已审核通过，不能修改信息");
         }
 
@@ -111,6 +116,70 @@ public class AppInfoSServiceImpl implements AppInfoSService {
             return Result.getSuccess();
         }
         return Result.getError();
+    }
+
+    @Override
+    public Result appShelf(Integer appid) {
+        Storage storage = appInfoSMapper.getAppstatusId(appid);
+        if (storage.getStatusId() != 2) {
+            log.info("该APP还未通过审核，不能上架");
+            return Result.getCustomize(false, -1, "该APP还未通过审核，不能上架");
+        }
+
+        if (storage.getFrameId() == 2) {
+            log.info("该APP已上架，不能重复上架");
+            return Result.getCustomize(false, -1, "该APP已上架，不能重复上架");
+        }
+
+        try {
+            AppInfoS appInfoS = new AppInfoS();
+            appInfoS.setId(appid);
+            appInfoS.setFrameid(2);
+
+            appInfoSMapper.updateByPrimaryKeySelective(appInfoS);
+
+            log.info("上架成功");
+            return Result.getCustomize(true, 0, "上架成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        log.info("上架失败");
+        return Result.getCustomize(false, -1, "上架失败");
+    }
+
+    @Override
+    public Result appObtained(Integer appid) {
+        Storage storage = appInfoSMapper.getAppstatusId(appid);
+        if (storage.getStatusId() != 2) {
+            log.info("该APP还未通过审核，不能下架");
+            return Result.getCustomize(false, -1, "该APP还未通过审核，不能下架");
+        }
+
+        if (storage.getFrameId() == 1) {
+            log.info("该APP还未上架，不能下架");
+            return Result.getCustomize(false, -1, "该APP还未上架，不能下架");
+        }
+        if (storage.getFrameId() == 3) {
+            log.info("该APP已下架，不能重复下架");
+            return Result.getCustomize(false, -1, "该APP已下架，不能重复下架");
+        }
+
+        try {
+            AppInfoS appInfoS = new AppInfoS();
+            appInfoS.setId(appid);
+            appInfoS.setFrameid(3);
+
+            appInfoSMapper.updateByPrimaryKeySelective(appInfoS);
+
+            log.info("下架成功");
+            return Result.getCustomize(true, 0, "下架成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        log.info("下架失败");
+        return Result.getCustomize(false, -1, "下架失败");
     }
 
 

@@ -7,6 +7,7 @@ import com.xuan.springappinfo.utils.Result;
 import com.xuan.springappinfo.utils.entity.Condition;
 import com.xuan.springappinfo.utils.entity.Storage;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -103,6 +104,7 @@ public class AppInfoSController {
      * @Date 2018/10/27 15:57
      * @Param
      **/
+    @RequestMapping("/getAppinfo")
     public Result getAppinfo(int id) {
         return appInfoSService.getAppinfo(id);
     }
@@ -119,5 +121,31 @@ public class AppInfoSController {
     @RequestMapping("/updateAppStatus")
     public Result updateAppStatus(AppInfoS appInfoS) {
         return appInfoSService.updateAppStatus(appInfoS);
+    }
+
+    /**
+     * <p>Description: APP上架功能 </p>
+     * @author Yat-Xuan
+     * @params: [appid]
+     * @return: com.xuan.springappinfo.utils.Result
+     * @Date: 2018/11/2 0002 22:25
+     * @Modified By:
+    */
+    @RequestMapping("/appShelf")
+    public Result appShelf(@RequestParam(name = "appid") Integer appid){
+        return appInfoSService.appShelf(appid);
+    }
+
+    /**
+     * <p>Description: APP下架功能 </p>
+     * @author Yat-Xuan
+     * @params: [appid]
+     * @return: com.xuan.springappinfo.utils.Result
+     * @Date: 2018/11/2 0002 22:27
+     * @Modified By:
+    */
+    @RequestMapping("/appObtained")
+    public Result appObtained(@RequestParam(name = "appid") Integer appid){
+        return appInfoSService.appObtained(appid);
     }
 }

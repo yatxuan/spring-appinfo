@@ -19,17 +19,6 @@ function SelectApp() {
     //获取二级分类id
     var threeAPPClassId = $('[ name="queryCategoryLevel3"]').val();
 
-    //获取上架状态id
-    var frameId = $('[ name="frameId"]').val();
-
-    //获取审核状态id
-    var statusId = $('[ name="queryStatus"]').val();
-
-    //获取三个span标签的值
-    var size = $('[name="size"]').text();
-    var currNo = $('[name="currNo"]').text();
-    var pageCurrNo = $('[name="pageCurrNo"]').text();
-
     var html = "<thead>" +
         "<tr role=\"row\">" +
         "    <th class=\"sorting_asc\" tabindex=\"0\"" +
@@ -71,13 +60,8 @@ function SelectApp() {
         "</thead>" +
         "<tbody>";
 
-    alert(frameId)
-
-
     $.get("/appInfoS/getAppInfoS", {
         softwareName: softwareName,
-        statusId: statusId,
-        frameId: frameId,
         threeAPPClassId: threeAPPClassId,
         twoAPPClassId: twoAPPClassId,
         firstAPPClassId: firstAPPClassId,

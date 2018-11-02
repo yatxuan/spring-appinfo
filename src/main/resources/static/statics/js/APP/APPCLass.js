@@ -20,7 +20,7 @@ function TwoAPP() {
     var firstid = $('[name="queryCategoryLevel1"]').val();
     if (firstid > 0) {
         //清空三级分类
-        $('[name="queryCategoryLevel3"]').html("<option value='0'>--请选择--</option>");
+        $('[name="queryCategoryLevel3"]').html(" ");
 
         $.get("/twoAPPClass/getTwoAPPClass?firstAPPClassId=" + firstid, function (data) {
             var html = "<option value='0'>--请选择--</option>";
@@ -44,7 +44,7 @@ function ThreeAPP() {
     if (twoID > 0) {
 
         //清空三级分类
-        $('[name="queryCategoryLevel3"]').html("<option value='0'>--请选择--</option>");
+        $('[name="queryCategoryLevel3"]').html(" ");
 
         $.get("/threeAPPClass/getThreeAPPClass?twoAPPClassId=" + twoID, function (data) {
             var html = "<option value='0'>--请选择--</option>";

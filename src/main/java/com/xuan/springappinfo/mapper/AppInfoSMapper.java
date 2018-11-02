@@ -4,6 +4,7 @@ import com.xuan.springappinfo.pojo.AppInfoS;
 import com.xuan.springappinfo.utils.entity.Storage;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 import java.util.Map;
@@ -24,22 +25,24 @@ public interface AppInfoSMapper {
 
     /**
      * <p>Description:查询APP的总数量 </p>
+     *
      * @author Yat-Xuan
      * @params: [map]
      * @return: int
      * @Date: 2018/11/2 0002 17:01
      * @Modified By:
-    */
+     */
     int getAppInfoSCount(Map<String, Object> map);
 
     /**
      * <p>Description: 查询APP的总数据信息 </p>
+     *
      * @author Yat-Xuan
      * @params: [map]
      * @return: java.util.List<com.xuan.springappinfo.utils.entity.Storage>
      * @Date: 2018/11/2 0002 17:02
      * @Modified By:
-    */
+     */
     List<Storage> getAppInfoS(Map<String, Object> map);
 
     /**
@@ -50,6 +53,17 @@ public interface AppInfoSMapper {
      * @Param [id]
      **/
     Storage getAppInfoId(@Param("appId") Integer id);
+
+    /**
+     * <p>Description: 查询APP的上架审核状态信息 </p>
+     * @author Yat-Xuan
+     * @params: [appid]
+     * @return: com.xuan.springappinfo.utils.entity.Storage
+     * @Date: 2018/11/2 0002 22:31
+     * @Modified By:
+    */
+    @Select("select statusId,frameId from appinfos where id=#{appId}")
+    Storage getAppstatusId(@Param("appId") Integer appid);
 
     /**
      * 功能描述: <br>

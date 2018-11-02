@@ -73,7 +73,7 @@
             AND app.softwareName like CONCAT('%',#{softwareName},'%')
         </if>
         <if test="flatFormId != null and flatFormId != 0">
-            AND app.flatformId = #{flatformId}
+            AND app.flatformId = #{flatFormId}
         </if>
         <if test="firstAPPClassId != null and firstAPPClassId != 0">
             AND app.firstAPPClassId = #{firstAPPClassId}
@@ -99,7 +99,7 @@
         SELECT
         app.id "appId",
         app.softwareName "softwareName",
-        app.APKName "APKName",
+        app.APKName "aPKName",
         app.supportROM "supportROM",
         app.interfaceLanguageId "interfaceLanguageId",
         app.softwareSize "softwareSize",
@@ -158,7 +158,7 @@
             AND app.softwareName like CONCAT('%',#{softwareName},'%')
         </if>
         <if test="flatFormId != null and flatFormId != 0">
-            AND app.flatformId = #{flatformId}
+            AND app.flatformId = #{flatFormId}
         </if>
         <if test="firstAPPClassId != null and firstAPPClassId != 0">
             AND app.firstAPPClassId = #{firstAPPClassId}
@@ -186,7 +186,7 @@
         SELECT
         app.id "appId",
         app.softwareName "softwareName",
-        app.APKName "APKName",
+        app.APKName "aPKName",
         app.supportROM "supportROM",
         app.interfaceLanguageId "interfaceLanguageId",
         app.softwareSize "softwareSize",

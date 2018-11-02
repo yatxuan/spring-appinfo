@@ -1,11 +1,9 @@
 package com.xuan.springappinfo.service;
 
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.Appinfo;
 import com.xuan.springappinfo.pojo.AppInfoS;
-import com.xuan.springappinfo.pojo.AppVersion;
+import com.xuan.springappinfo.utils.Page;
 import com.xuan.springappinfo.utils.Result;
 import com.xuan.springappinfo.utils.entity.Condition;
-import com.xuan.springappinfo.utils.Page;
 import com.xuan.springappinfo.utils.entity.Storage;
 
 import java.util.List;
@@ -107,12 +105,22 @@ public interface AppInfoSService {
     Result updateAppStatus(AppInfoS appInfoS);
 
     /**
-     * 功能描述: <br>
-     * 〈查询是否能修改APP的版本号〉
-     * @Author Yat-Xuan
-     * @Description //TODO ASUS
-     * @Date 2018/10/27 15:57
-     * @Param
-     * @return 
-     **/
+     * <p>Description: APP上架功能 </p>
+     * @author Yat-Xuan
+     * @params: [appid]
+     * @return: com.xuan.springappinfo.utils.Result
+     * @Date: 2018/11/2 0002 22:25
+     * @Modified By:
+     */
+    Result appShelf(Integer appid);
+
+    /**
+     * <p>Description: APP下架功能 </p>
+     * @author Yat-Xuan
+     * @params: [appid]
+     * @return: com.xuan.springappinfo.utils.Result
+     * @Date: 2018/11/2 0002 22:27
+     * @Modified By:
+     */
+    Result appObtained(Integer appid);
 }

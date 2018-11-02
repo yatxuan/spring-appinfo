@@ -28,7 +28,7 @@ public class Storage {
     /**
      * APP 的APK名称（唯一）
      */
-    private String APKName;
+    private String aPKName;
     /**
      * APP支持的ROM(版本号)
      */
