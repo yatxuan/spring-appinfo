@@ -1,68 +1,76 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.xuan.springappinfo.mapper.ThreeAPPClassMapper" >
-  <resultMap id="BaseResultMap" type="com.xuan.springappinfo.pojo.ThreeAPPClass" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="threeAPPName" property="threeappname" jdbcType="VARCHAR" />
-    <result column="twoAPPClassId" property="twoappclassid" jdbcType="INTEGER" />
-  </resultMap>
-  <sql id="Base_Column_List" >
+<mapper namespace="com.xuan.springappinfo.mapper.ThreeAPPClassMapper">
+    <resultMap id="BaseResultMap" type="com.xuan.springappinfo.pojo.ThreeAPPClass">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="threeAPPName" property="threeappname" jdbcType="VARCHAR"/>
+        <result column="twoAPPClassId" property="twoappclassid" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     id, threeAPPName, twoAPPClassId
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from threeappclass
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from threeappclass
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="getThreeAPPClass" resultType="com.xuan.springappinfo.pojo.ThreeAPPClass">
+        select id,threeAPPName from threeAPPClass
+        <where>
+            <if test="twoAPPClassId!=0">
+                twoAPPClassId=#{twoAPPClassId}
+            </if>
+        </where>
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from threeappclass
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.xuan.springappinfo.pojo.ThreeAPPClass" >
+    <insert id="insert" parameterType="com.xuan.springappinfo.pojo.ThreeAPPClass">
     insert into threeappclass (id, threeAPPName, twoAPPClassId
       )
     values (#{id,jdbcType=INTEGER}, #{threeappname,jdbcType=VARCHAR}, #{twoappclassid,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.xuan.springappinfo.pojo.ThreeAPPClass" >
-    insert into threeappclass
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="threeappname != null" >
-        threeAPPName,
-      </if>
-      <if test="twoappclassid != null" >
-        twoAPPClassId,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="threeappname != null" >
-        #{threeappname,jdbcType=VARCHAR},
-      </if>
-      <if test="twoappclassid != null" >
-        #{twoappclassid,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.xuan.springappinfo.pojo.ThreeAPPClass" >
-    update threeappclass
-    <set >
-      <if test="threeappname != null" >
-        threeAPPName = #{threeappname,jdbcType=VARCHAR},
-      </if>
-      <if test="twoappclassid != null" >
-        twoAPPClassId = #{twoappclassid,jdbcType=INTEGER},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.xuan.springappinfo.pojo.ThreeAPPClass" >
+    <insert id="insertSelective" parameterType="com.xuan.springappinfo.pojo.ThreeAPPClass">
+        insert into threeappclass
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="threeappname != null">
+                threeAPPName,
+            </if>
+            <if test="twoappclassid != null">
+                twoAPPClassId,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="threeappname != null">
+                #{threeappname,jdbcType=VARCHAR},
+            </if>
+            <if test="twoappclassid != null">
+                #{twoappclassid,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.xuan.springappinfo.pojo.ThreeAPPClass">
+        update threeappclass
+        <set>
+            <if test="threeappname != null">
+                threeAPPName = #{threeappname,jdbcType=VARCHAR},
+            </if>
+            <if test="twoappclassid != null">
+                twoAPPClassId = #{twoappclassid,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.xuan.springappinfo.pojo.ThreeAPPClass">
     update threeappclass
     set threeAPPName = #{threeappname,jdbcType=VARCHAR},
       twoAPPClassId = #{twoappclassid,jdbcType=INTEGER}

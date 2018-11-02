@@ -35,17 +35,15 @@ public class LoginController {
         subject.login(token);
 
 //       退出登录方法之前，再从redis取出刚刚查询到的数据，返回登录账号的信息！
-        if (redisService.exists(user.getCode())) {
-            user = redisService.getClazz(user.getCode(), User.class);
-            user.setPassWord(null);
+        user = redisService.getClazz(user.getCode(), User.class);
+        user.setPassWord(null);
 
-            //返回数据之前，先清空该账号密码,在把该账号保存到session里
-            subject.getSession().setAttribute("user", user);
+        //返回数据之前，先清空该账号密码,在把该账号保存到session里
+        subject.getSession().setAttribute("user", user);
 
-            log.info("退出登录方法！");
-            return Result.getClass(user);
-        }
-        return Result.getFailure();
+        log.info("退出登录方法！");
+
+        return Result.getClass(user);
 
     }
 }

@@ -2,6 +2,7 @@ package com.xuan.springappinfo.utils.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  * 保存所有用户信息
@@ -11,6 +12,7 @@ import lombok.Setter;
  **/
 @Getter
 @Setter
+@ToString
 public class User {
 
     private int id;

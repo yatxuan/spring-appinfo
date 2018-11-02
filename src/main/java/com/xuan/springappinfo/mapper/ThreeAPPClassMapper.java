@@ -2,7 +2,7 @@ package com.xuan.springappinfo.mapper;
 
 import com.xuan.springappinfo.pojo.ThreeAPPClass;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -29,6 +29,5 @@ public interface ThreeAPPClassMapper {
      * @Param [twoAPPClassId] 二级分类的id
      * @return com.xuan.springappinfo.pojo.ThreeAPPClass
      **/
-    @Select("select id,threeAPPName from threeAPPClass where twoAPPClassId=#{twoAPPClassId}")
-    List<ThreeAPPClass> getThreeAPPClass(int twoAPPClassId);
+    List<ThreeAPPClass> getThreeAPPClass(@Param("twoAPPClassId") int twoAPPClassId);
 }

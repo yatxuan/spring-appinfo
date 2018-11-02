@@ -1,11 +1,12 @@
 package com.xuan.springappinfo.utils.shiro;
 
-import javax.servlet.ServletRequest;
-import javax.servlet.http.HttpServletRequest;
-
 import com.xuan.springappinfo.utils.Result;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 
 /**
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  **/
 @RestController
 @RequestMapping("/shiro")
+@Slf4j
 public class ShiroLoginFilter {
 
     /**
@@ -32,7 +34,7 @@ public class ShiroLoginFilter {
      **/
     @RequestMapping("/onAccessDenied")
     protected Result onAccessDenied() {
-
+        log.info("拦截没有登录的请求!");
         return Result.getCustomize(false, -1, "请登录！！！");
     }
 

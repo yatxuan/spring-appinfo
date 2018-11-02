@@ -1,10 +1,5 @@
 package com.xuan.springappinfo.utils;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -108,10 +103,7 @@ public class Result {
 
     public static Result getList(List objectlist) {
         if (objectlist.size() > 0) {
-            List<Object> list = new ArrayList<>();
-            list.add(objectlist);
-
-            return new Result(ResultCode.SUCCESS, list);
+            return new Result(ResultCode.SUCCESS, objectlist);
         } else {
             return getFailure();
         }

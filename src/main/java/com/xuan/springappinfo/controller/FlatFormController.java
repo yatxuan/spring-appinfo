@@ -10,7 +10,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * <p>Description: 描述 </p>
+ * <p>Description: APP所属平台类 </p>
  *
  * @Created with IDEA
  * @author: Yi-Xuan
@@ -23,6 +23,7 @@ public class FlatFormController {
 
     @Resource
     private FlatFormService flatFormService;
+
 
     @RequestMapping("/getFlatForm")
     public Result getFlatForm() {

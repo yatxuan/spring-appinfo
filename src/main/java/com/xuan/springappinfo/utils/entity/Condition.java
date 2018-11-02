@@ -1,6 +1,5 @@
 package com.xuan.springappinfo.utils.entity;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -50,12 +49,12 @@ public class Condition {
     /**
      * 当前页码
      */
-    private Integer currNo=1;
+    private Integer currNo = 1;
 
     /**
      * 每页显示数据量
      */
-    private Integer size=15;
+    private Integer size = 15;
 
     /**
      * APP 上架状态ID
@@ -71,5 +70,10 @@ public class Condition {
      * APP 开发者id
      */
     private int devUserId;
+
+    /**
+     * 最新版本号
+     */
+    private String versionNo;
 
 }

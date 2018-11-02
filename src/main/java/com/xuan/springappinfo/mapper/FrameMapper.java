@@ -2,6 +2,9 @@ package com.xuan.springappinfo.mapper;
 
 import com.xuan.springappinfo.pojo.Frame;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 @Mapper
 public interface FrameMapper {
@@ -16,4 +19,7 @@ public interface FrameMapper {
     int updateByPrimaryKeySelective(Frame record);
 
     int updateByPrimaryKey(Frame record);
+
+    @Select("select * from frame")
+    List<Frame> getFrame();
 }

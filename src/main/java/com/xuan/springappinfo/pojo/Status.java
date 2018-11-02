@@ -1,5 +1,11 @@
 package com.xuan.springappinfo.pojo;
 
+/**
+ * <p>Description: 审核 </p>
+ * @author Yat-Xuan
+ * @Date: 2018/11/2 0002 9:23
+ * @Modified By:
+*/
 public class Status {
     private Integer id;
 

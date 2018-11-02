@@ -147,7 +147,11 @@
             <version>2.9.0</version>
         </dependency>
 
-
+        <!--解析HTML-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -180,7 +184,4 @@
             </plugin>
         </plugins>
     </build>
-
-
-
 </project>

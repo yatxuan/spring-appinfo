@@ -11,7 +11,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>Description: 描述 </p>
@@ -29,14 +31,18 @@ public class AppInfoSServiceImpl implements AppInfoSService {
 
     @Override
     public List<Storage> getAppInfoS(Condition condition, Page page) {
-        condition.setCurrNo((page.getCurrNo() - 1) * page.getSize());
-        condition.setSize(page.getSize());
-        return appInfoSMapper.getAppInfoS(condition);
+
+        Map<String, Object> map = getMap(condition, page);
+
+        return appInfoSMapper.getAppInfoS(map);
     }
 
     @Override
     public Page getAppInfoSCount(Condition condition) {
-        int totalSize = appInfoSMapper.getAppInfoSCount(condition);
+
+        Map<String, Object> map = getMap(condition, null);
+
+        int totalSize = appInfoSMapper.getAppInfoSCount(map);
 
         Page page = new Page();
         page.setSize(condition.getSize());
@@ -105,6 +111,30 @@ public class AppInfoSServiceImpl implements AppInfoSService {
             return Result.getSuccess();
         }
         return Result.getError();
+    }
+
+
+    public static Map<String, Object> getMap(Condition condition, Page page) {
+        Map<String, Object> map = new HashMap<>(16);
+        if (condition != null) {
+            map.put("appId", condition.getAppId());
+            map.put("softwareName", condition.getSoftwareName());
+            map.put("flatFormId", condition.getFlatFormId());
+            map.put("firstAPPClassId", condition.getFirstAPPClassId());
+            map.put("twoAPPClassId", condition.getTwoAPPClassId());
+            map.put("threeAPPClassId", condition.getThreeAPPClassId());
+            map.put("devUserId", condition.getDevUserId());
+            map.put("frameId", condition.getFrameId());
+            map.put("statusId", condition.getStatusId());
+        }
+
+        if (page != null) {
+            int currNo = (page.getCurrNo() - 1) * page.getSize();
+            map.put("currNo", currNo);
+            map.put("size", page.getSize());
+        }
+
+        return map;
     }
 }
 

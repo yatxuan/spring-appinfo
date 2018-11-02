@@ -2,9 +2,9 @@ package com.xuan.springappinfo.controller;
 
 import com.xuan.springappinfo.pojo.AppInfoS;
 import com.xuan.springappinfo.service.AppInfoSService;
-import com.xuan.springappinfo.utils.entity.Condition;
 import com.xuan.springappinfo.utils.Page;
 import com.xuan.springappinfo.utils.Result;
+import com.xuan.springappinfo.utils.entity.Condition;
 import com.xuan.springappinfo.utils.entity.Storage;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,7 +34,6 @@ public class AppInfoSController {
      * @Date 15:00 2018/10/29 0029
      * @Param [condition]
      **/
-
     @RequestMapping("/getAppInfoS")
     public Result getAppInfoS(Condition condition) {
 
@@ -117,7 +116,6 @@ public class AppInfoSController {
      * @Date 16:45 2018/10/29 0029
      * @Param [appId, statusId]
      **/
-
     @RequestMapping("/updateAppStatus")
     public Result updateAppStatus(AppInfoS appInfoS) {
         return appInfoSService.updateAppStatus(appInfoS);

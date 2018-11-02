@@ -28,15 +28,26 @@ public class ShiroBean {
 
         // 必须设置 SecurityManager
         shiroFilterFactoryBean.setSecurityManager(securityManager);
-        shiroFilterFactoryBean.setLoginUrl("/shiro/onAccessDenied");
+        // shiroFilterFactoryBean.setLoginUrl("/shiro/onAccessDenied");
+        shiroFilterFactoryBean.setLoginUrl("/login.html");
 
 
         // 拦截器.
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
+
+
+        filterChainDefinitionMap.put("/statics/**", "anon");
+
+
         filterChainDefinitionMap.put("/login/getuser", "anon");
+        filterChainDefinitionMap.put("/login/html", "anon");
+        filterChainDefinitionMap.put("/403.html", "anon");
+
+        // filterChainDefinitionMap.put("/**", "anon");
+        filterChainDefinitionMap.put("/**", "authc");
+
 //        filterChainDefinitionMap.put("/getIndex", "anon");
 //        filterChainDefinitionMap.put("/getIndex", "rolesOr[admin,admin1]");
-        filterChainDefinitionMap.put("/**", "authc");
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 

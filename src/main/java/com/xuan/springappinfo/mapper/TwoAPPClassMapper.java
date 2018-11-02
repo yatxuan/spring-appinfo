@@ -2,7 +2,7 @@ package com.xuan.springappinfo.mapper;
 
 import com.xuan.springappinfo.pojo.TwoAPPClass;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -30,6 +30,5 @@ public interface TwoAPPClassMapper {
      * @Date 2018/10/24 16:45
      * @Param [firstAPPClassId] 一级分类id
      **/
-    @Select("select id,twoAPPName from twoappclass where firstAPPClassId=#{firstAPPClassId}")
-    List<TwoAPPClass> getTwoAPPClass(int firstAPPClassId);
+    List<TwoAPPClass> getTwoAPPClass(@Param("firstAPPClassId") int firstAPPClassId);
 }

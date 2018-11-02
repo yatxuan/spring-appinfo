@@ -10,7 +10,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * <p>Description: 描述 </p>
+ * <p>Description: APP一级分类 </p>
  *
  * @Created with IDEA
  * @author: Yi-Xuan

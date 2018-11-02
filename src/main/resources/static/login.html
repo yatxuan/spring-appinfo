@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>后台管理系统</title>
+
+    <!-- Bootstrap -->
+    <link href="/statics/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="/statics/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="/statics/css/nprogress.css" rel="stylesheet">
+    <!-- Custom Theme Style -->
+    <link href="/statics/css/custom.min.css" rel="stylesheet">
+</head>
+
+<body class="login">
+<div>
+    <a class="hiddenanchor" id="signup"></a>
+    <a class="hiddenanchor" id="signin"></a>
+
+    <div class="login_wrapper">
+        <div class="animate form login_form">
+            <section class="login_content">
+                <form>
+                    <h1>后台管理系统</h1>
+                    <div>
+                        <input type="text" class="form-control" name="userCode" placeholder="请输入用户名" required=""/>
+                    </div>
+                    <div>
+                        <input type="password" class="form-control" name="userPassword" placeholder="请输入密码"
+                               required=""/>
+                    </div>
+                    <span name="error" style="color: red"></span>
+                    <div>
+                        <button type="button" class="btn btn-success" onclick="login()">登 录</button>
+                        <button type="reset" class="btn btn-default">重　填</button>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="separator">
+                        <div>
+                            <p>©2016 All Rights Reserved. </p>
+                        </div>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </div>
+</div>
+<script src="statics/js/jquery-1.12.4.js"></script>
+<script>
+    function login() {
+        var code = $('[name="userCode"]').val();
+        var passWord = $('[name="userPassword"]').val();
+        if (code == "") {
+            $('[name="error"]').html("请输入账号");
+            return;
+        }
+        if (passWord == "") {
+            $('[name="error"]').html("请输入密码");
+            return;
+        }
+
+        // $.get("http://127.0.0.1:9001/login/getuser?code=" + code + "&passWord=" + passWord, function (data) {
+        $.get("http://127.0.0.1:9001/login/getuser", {code: code, passWord: passWord}, function (data) {
+            if (data.success) {
+                if (data.data.roles == "管理者") {
+                    window.location.replace("/backend/main.html");
+                } else if (data.data.roles == "开发者") {
+                    window.location.replace("/developer/main.html");
+                }
+            } else {
+                $('[name="error"]').html(data.message);
+            }
+        });
+    }
+</script>
+</body>
+</html>
