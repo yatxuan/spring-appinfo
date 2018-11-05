@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 /**
  * @Author: YatXuan
@@ -45,5 +46,20 @@ public class LoginController {
 
         return Result.getClass(user);
 
+    }
+
+    /**
+     * <p>Description: 获取保存在session里的用户数据 </p>
+     *
+     * @author Yat-Xuan
+     * @params: []
+     * @return: com.xuan.springappinfo.utils.entity.User
+     * @Date: 2018/11/5 0005 16:09
+     * @Modified By:
+     */
+    @RequestMapping("/loginUser")
+    public Result loginUser(HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        return Result.getClass(user);
     }
 }

@@ -300,7 +300,6 @@
                                                    cellspacing="0" width="100%" role="grid"
                                                    aria-describedby="datatable-responsive_info"
                                                    style="width: 100%;">
-
                                             </table>
                                         </div>
                                     </div>
@@ -405,33 +404,102 @@
     }
 
     //APP上架方法
-    function AppShelf(appid) {
-        $("/appInfoS/appShelf", {appid: appid}, function (data) {
+    $(document).on('click', ".saleSwichOpen", function () {
+        var appid = $(this).attr("appid");
+        $.get("/appInfoS/appShelf", {appid: appid}, function (data) {
             if (data.success) {
-                alert(1);
                 alert(data.message);
                 SelectApp();
             } else {
-                alert(2);
                 alert(data.message);
             }
         })
-
-    }
+    })
 
     //APP下架方法
-    function AppObtained(appid) {
-        $("/appInfoS/appObtained", {appid: appid}, function (data) {
+    $(document).on('click', ".saleSwichClose", function () {
+        var appid = $(this).attr("appid");
+        $.get("/appInfoS/appObtained", {appid: appid}, function (data) {
             if (data.success) {
-                alert(1);
                 alert(data.message);
                 SelectApp();
             } else {
-                alert(2);
                 alert(data.message);
             }
         })
-    }
+    })
+
+    //判断能否新增APP版本
+    $(document).on('click', ".addVersion", function () {
+        var appid = $(this).attr("appid");
+        $.get("/appInfoS/getAppInfoId", {id: appid}, function (data) {
+            if (data.success) {
+                if (data.data.statusId != 2) {
+                    return alert("该APP还未通过审核，不能进行版本新增");
+                }
+                window.location.replace("/developer/appversionadd.html?appid=" + appid);
+            } else {
+                alert(data.message);
+            }
+        })
+    })
+
+    //APP修改版本方法
+    $(document).on('click', ".modifyVersion", function () {
+        alert("修改版本")
+        var appid = $(this).attr("appid");
+        $.get("/appInfoS/", {appid: appid}, function (data) {
+            if (data.success) {
+                alert(data.message);
+                SelectApp();
+            } else {
+                alert(data.message);
+            }
+        })
+    })
+
+    //APP修改基本信息方法
+    $(document).on('click', ".modifyAppInfo", function () {
+        alert("修改基本信息")
+        var appid = $(this).attr("appid");
+        $.get("/appInfoS/", {appid: appid}, function (data) {
+            if (data.success) {
+                alert(data.message);
+                SelectApp();
+            } else {
+                alert(data.message);
+            }
+        })
+    })
+
+    //APP修改查看信息方法
+    $(document).on('click', ".viewApp", function () {
+        alert("查看基本信息")
+        var appid = $(this).attr("appid");
+        $.get("/appInfoS/", {appid: appid}, function (data) {
+            if (data.success) {
+                alert(data.message);
+                SelectApp();
+            } else {
+                alert(data.message);
+            }
+        })
+    })
+
+    //APP删除方法
+    $(document).on('click', ".deleteApp", function () {
+        alert("删除APP")
+        var appid = $(this).attr("appid");
+        $.get("/appInfoS/", {appid: appid}, function (data) {
+            if (data.success) {
+                alert(data.message);
+                SelectApp();
+            } else {
+                alert(data.message);
+            }
+        })
+    })
+
 </script>
 </html>
 

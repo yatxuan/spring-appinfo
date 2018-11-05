@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -131,10 +132,16 @@ public class AppInfoSServiceImpl implements AppInfoSService {
             return Result.getCustomize(false, -1, "该APP已上架，不能重复上架");
         }
 
+        if (storage.getVersionId() == null || storage.getVersionId() == 0) {
+            log.info("该APP没有版本，请新增版本后，在进行上传");
+            return Result.getCustomize(false, -1, "该APP没有版本，请新增版本后，在进行上架");
+        }
+
         try {
             AppInfoS appInfoS = new AppInfoS();
             appInfoS.setId(appid);
             appInfoS.setFrameid(2);
+            appInfoS.setOnsaledate(new Date());
 
             appInfoSMapper.updateByPrimaryKeySelective(appInfoS);
 
@@ -169,6 +176,7 @@ public class AppInfoSServiceImpl implements AppInfoSService {
             AppInfoS appInfoS = new AppInfoS();
             appInfoS.setId(appid);
             appInfoS.setFrameid(3);
+            appInfoS.setOffsaledate(new Date());
 
             appInfoSMapper.updateByPrimaryKeySelective(appInfoS);
 
@@ -180,6 +188,11 @@ public class AppInfoSServiceImpl implements AppInfoSService {
 
         log.info("下架失败");
         return Result.getCustomize(false, -1, "下架失败");
+    }
+
+    @Override
+    public Result addVersion(Integer appid) {
+        return null;
     }
 
 

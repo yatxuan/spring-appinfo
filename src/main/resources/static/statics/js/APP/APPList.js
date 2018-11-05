@@ -75,7 +75,7 @@ function SelectApp() {
             for (var i = 0; i < list.length; i++) {
                 html += "<tr role=\"row\" class=\"odd\">" +
                     "    <td tabindex=\"0\" class=\"sorting_1\">" + list[i].softwareName + "</td>" +
-                    "    <td>" + list[i].APKName + "</td>" +
+                    "    <td>" + list[i].apkname + "</td>" +
                     "    <td>" + list[i].softwareSize + "</td>" +
                     "    <td>" + list[i].flatformName + "</td>" +
                     "    <td>" + list[i].firstAPPName + " -> " + list[i].twoAPPName + " -> " + list[i].threeAPPName + "</td>" +

@@ -257,9 +257,9 @@
       logoLocPath, versionId)
     values (#{id,jdbcType=INTEGER}, #{softwarename,jdbcType=VARCHAR}, #{apkname,jdbcType=VARCHAR},
       #{supportrom,jdbcType=VARCHAR}, #{interfacelanguageid,jdbcType=INTEGER}, #{softwaresize,jdbcType=DOUBLE},
-      #{updatedate,jdbcType=TIMESTAMP}, #{devuserid,jdbcType=INTEGER}, #{appintroduction,jdbcType=VARCHAR},
-      #{statusid,jdbcType=INTEGER}, #{frameid,jdbcType=INTEGER}, #{onsaledate,jdbcType=TIMESTAMP},
-      #{offsaledate,jdbcType=TIMESTAMP}, #{flatformid,jdbcType=INTEGER}, #{downloads,jdbcType=DOUBLE},
+      NOW(), #{devuserid,jdbcType=INTEGER}, #{appintroduction,jdbcType=VARCHAR},
+      #{statusid,jdbcType=INTEGER}, #{frameid,jdbcType=INTEGER}, NOW(),
+      NOW(), #{flatformid,jdbcType=INTEGER}, #{downloads,jdbcType=DOUBLE},
       #{createdby,jdbcType=INTEGER}, #{creationdate,jdbcType=TIMESTAMP}, #{firstappclassid,jdbcType=INTEGER},
       #{twoappclassid,jdbcType=INTEGER}, #{threeappclassid,jdbcType=INTEGER}, #{logopicpath,jdbcType=VARCHAR},
       #{logolocpath,jdbcType=VARCHAR}, #{versionid,jdbcType=INTEGER})
@@ -358,7 +358,7 @@
                 #{softwaresize,jdbcType=DOUBLE},
             </if>
             <if test="updatedate != null">
-                #{updatedate,jdbcType=TIMESTAMP},
+                NOW(),
             </if>
             <if test="devuserid != null">
                 #{devuserid,jdbcType=INTEGER},
@@ -373,10 +373,10 @@
                 #{frameid,jdbcType=INTEGER},
             </if>
             <if test="onsaledate != null">
-                #{onsaledate,jdbcType=TIMESTAMP},
+                NOW(),
             </if>
             <if test="offsaledate != null">
-                #{offsaledate,jdbcType=TIMESTAMP},
+                NOW(),
             </if>
             <if test="flatformid != null">
                 #{flatformid,jdbcType=INTEGER},
@@ -430,7 +430,7 @@
                 softwareSize = #{softwaresize,jdbcType=DOUBLE},
             </if>
             <if test="updatedate != null">
-                updateDate = #{updatedate,jdbcType=TIMESTAMP},
+                updateDate = NOW(),
             </if>
             <if test="devuserid != null">
                 devUserId = #{devuserid,jdbcType=INTEGER},
@@ -445,10 +445,10 @@
                 frameId = #{frameid,jdbcType=INTEGER},
             </if>
             <if test="onsaledate != null">
-                onSaleDate = #{onsaledate,jdbcType=TIMESTAMP},
+                onSaleDate = NOW(),
             </if>
             <if test="offsaledate != null">
-                offSaleDate = #{offsaledate,jdbcType=TIMESTAMP},
+                offSaleDate = NOW(),
             </if>
             <if test="flatformid != null">
                 flatformId = #{flatformid,jdbcType=INTEGER},
@@ -491,13 +491,13 @@
       supportROM = #{supportrom,jdbcType=VARCHAR},
       interfaceLanguageId = #{interfacelanguageid,jdbcType=INTEGER},
       softwareSize = #{softwaresize,jdbcType=DOUBLE},
-      updateDate = #{updatedate,jdbcType=TIMESTAMP},
+      updateDate = NOW(),
       devUserId = #{devuserid,jdbcType=INTEGER},
       appIntroduction = #{appintroduction,jdbcType=VARCHAR},
       statusId = #{statusid,jdbcType=INTEGER},
       frameId = #{frameid,jdbcType=INTEGER},
-      onSaleDate = #{onsaledate,jdbcType=TIMESTAMP},
-      offSaleDate = #{offsaledate,jdbcType=TIMESTAMP},
+      onSaleDate = NOW(),
+      offSaleDate = NOW(),
       flatformId = #{flatformid,jdbcType=INTEGER},
       downloads = #{downloads,jdbcType=DOUBLE},
       createdBy = #{createdby,jdbcType=INTEGER},

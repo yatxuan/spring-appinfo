@@ -81,6 +81,13 @@ public class Result {
         this.message = message;
     }
 
+    private Result(boolean success, Integer code, String message, Object data) {
+        this.success = success;
+        this.code = code;
+        this.message = message;
+        this.data = data;
+    }
+
     public static Result getListAndPage(Page page, List list) {
         if (list.size() > 0) {
             Map<String, Object> map = new HashMap<>(16);
@@ -119,6 +126,18 @@ public class Result {
      */
     public static Result getCustomize(boolean success, int code, String message) {
         return new Result(success, code, message);
+    }
+
+    /**
+     * 自定义返回信息
+     *
+     * @param success
+     * @param code
+     * @param message
+     * @return
+     */
+    public static Result getCustomize(boolean success, int code, String message, Map<String, Object> map) {
+        return new Result(success, code, message, map);
     }
 
     /**

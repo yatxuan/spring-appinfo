@@ -62,7 +62,7 @@ public interface AppInfoSMapper {
      * @Date: 2018/11/2 0002 22:31
      * @Modified By:
     */
-    @Select("select statusId,frameId from appinfos where id=#{appId}")
+    @Select("select statusId,frameId,versionId from appinfos where id=#{appId}")
     Storage getAppstatusId(@Param("appId") Integer appid);
 
     /**

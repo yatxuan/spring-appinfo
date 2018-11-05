@@ -21,6 +21,14 @@ public class AppVersionController {
     @Resource
     private AppVersionService appVersionService;
 
+    /**
+     * <p>Description: 新增APP版本信息 </p>
+     * @author Yat-Xuan
+     * @params: [appVersion]
+     * @return: com.xuan.springappinfo.utils.Result
+     * @Date: 2018/11/5 0005 13:52
+     * @Modified By:
+    */
     @RequestMapping("/saveAppVersion")
     public Result saveAppVersion(AppVersion appVersion) {
         return appVersionService.saveAppVersion(appVersion);
@@ -33,9 +41,8 @@ public class AppVersionController {
      * @Param [appId]
      * @return com.xuan.springappinfo.utils.Result
      **/
-
     @RequestMapping("/getAppVersionS")
-    public Result getAppVersionS(int appId) {
+    public Result getAppVersionS(Integer appId) {
         return appVersionService.getAppVersionS(appId);
     }
 

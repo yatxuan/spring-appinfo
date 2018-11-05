@@ -108,8 +108,8 @@ function SelectApp() {
             for (var i = 0; i < list.length; i++) {
                 html += "<tr role=\"row\" class=\"odd\">" +
                     "    <td tabindex=\"0\" class=\"sorting_1\">" + list[i].softwareName + "</td>" +
-                    "    <td>" + list[i].aPKName + "</td>" +
-                    "    <td>" + list[i].softwareSize + "</td>" +
+                    "    <td>" + list[i].apkname + "</td>" +
+                    "    <td>" + list[i].softwareSize + "M</td>" +
                     "    <td>" + list[i].flatformName + "</td>" +
                     "    <td>" + list[i].firstAPPName + " -> " + list[i].twoAPPName + " -> " + list[i].threeAPPName + "</td>" +
                     "    <td><span id=\"appInfoStatusid\">" + list[i].statusType + "</span></td>" +
@@ -128,43 +128,43 @@ function SelectApp() {
                     "                <li>" +
                     "                    <a class=\"saleSwichOpen\" saleSwitch=\"open\"" +
                     "                       data-toggle=\"tooltip\" data-placement=\"top\" title=\"\"" +
-                    "                       data-original-title=\"恭喜您，您的审核已经通过，您可以点击上架发布您的APP\" onclick='AppShelf(" + list[i].appId + ")'" +
+                    "                       data-original-title=\"恭喜您，您的审核已经通过，您可以点击上架发布您的APP\" appid='" + list[i].appId + "'" +
                     "                    >上架</a>" +
                     "                    <a class=\"saleSwichClose\" saleSwitch=\"close\"" +
                     "                       data-toggle=\"tooltip\" data-placement=\"top\" title=\"\"" +
-                    "                       data-original-title=\"您可以点击下架来停止发布您的APP，市场将不提供APP的下载\" onclick='AppObtained(" + list[i].appId + ")'" +
+                    "                       data-original-title=\"您可以点击下架来停止发布您的APP，市场将不提供APP的下载\" appid='" + list[i].appId + "'" +
                     "                    >下架</a>" +
                     "                </li>" +
                     "                <li>" +
                     "                    <a class=\"addVersion\"" +
                     "                       data-toggle=\"tooltip\" data-placement=\"top\" title=\"\"" +
-                    "                       data-original-title=\"新增APP版本信息\" onclick=\"AppVersionAdd(" + list[i].appId + ")\"" +
+                    "                       data-original-title=\"新增APP版本信息\" appid='" + list[i].appId + "'" +
                     "                    >新增版本</a>" +
                     "                </li>" +
                     "                <li>" +
                     "                    <a class=\"modifyVersion\"" +
                     "                       data-toggle=\"tooltip\" data-placement=\"top\" title=\"\"" +
-                    "                       data-original-title=\"修改APP最新版本信息\" onclick=\"APPVersionUpdate(" + list[i].appId + ")\"" +
+                    "                       data-original-title=\"修改APP最新版本信息\" appid='" + list[i].appId + "'" +
                     "                    >修改版本</a>" +
                     "                </li>" +
                     "                <li>" +
                     "                    <a class=\"modifyAppInfo\"" +
                     "                       data-toggle=\"tooltip\" data-placement=\"top\" title=\"\"" +
-                    "                       data-original-title=\"修改APP基础信息\" onclick=\"APPUpdate(" + list[i].appId + ")\"" +
+                    "                       data-original-title=\"修改APP基础信息\" appid='" + list[i].appId + "'" +
                     "                    >修改</a>" +
                     "                </li>" +
                     "                <li>" +
                     "                    <a class=\"viewApp\" data-toggle=\"tooltip\"" +
                     "                       data-placement=\"top\" title=\"\"" +
                     "                       data-original-title=\"查看APP基础信息以及全部版本信息\"" +
-                    "                       onclick=\"APPSelect(" + list[i].appId + ")\"" +
+                    "                       appid='" + list[i].appId + "'" +
                     "                    >查看</a>" +
                     "                </li>" +
                     "                <li>" +
                     "                    <a class=\"deleteApp\"" +
                     "                       data-toggle=\"tooltip\" data-placement=\"top\" title=\"\"" +
                     "                       data-original-title=\"删除APP基础信息以及全部版本信息\"" +
-                    "                       onclick=\"APPDelete(" + list[i].appId + ")\"" +
+                    "                       appid='" + list[i].appId + "'" +
                     "                    >删除</a>" +
                     "                </li>" +
                     "            </ul>" +
@@ -178,11 +178,10 @@ function SelectApp() {
             $('[name="currNo"]').text(page.currNo);
             $('[name="pageCurrNo"]').text(page.totalCurrNo);
 
-            html += "</tbody>";
-
         } else {
             alert(data.message);
         }
+        html += "</tbody>";
         $("#datatable-responsive").html(html);
     })
 }

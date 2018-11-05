@@ -15,11 +15,11 @@
     <result column="apkFileName" property="apkfilename" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, appInfoId, versionNo, versionInfo, releaseStatusId, downloadLink, versionSize, 
+    id, appInfoId, versionNo, versionInfo, releaseStatusId, downloadLink, versionSize,
     modifyBy, modifyDate, apkLocPath, apkFileName
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from appversion
     where id = #{id,jdbcType=INTEGER}
@@ -29,13 +29,13 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.xuan.springappinfo.pojo.AppVersion" >
-    insert into appversion (id, appInfoId, versionNo, 
-      versionInfo, releaseStatusId, downloadLink, 
-      versionSize, modifyBy, modifyDate, 
+    insert into appversion (id, appInfoId, versionNo,
+      versionInfo, releaseStatusId, downloadLink,
+      versionSize, modifyBy, modifyDate,
       apkLocPath, apkFileName)
-    values (#{id,jdbcType=INTEGER}, #{appinfoid,jdbcType=INTEGER}, #{versionno,jdbcType=VARCHAR}, 
-      #{versioninfo,jdbcType=VARCHAR}, #{releasestatusid,jdbcType=INTEGER}, #{downloadlink,jdbcType=VARCHAR}, 
-      #{versionsize,jdbcType=DOUBLE}, #{modifyby,jdbcType=INTEGER}, #{modifydate,jdbcType=TIMESTAMP}, 
+    values (#{id,jdbcType=INTEGER}, #{appinfoid,jdbcType=INTEGER}, #{versionno,jdbcType=VARCHAR},
+      #{versioninfo,jdbcType=VARCHAR}, #{releasestatusid,jdbcType=INTEGER}, #{downloadlink,jdbcType=VARCHAR},
+      #{versionsize,jdbcType=DOUBLE}, #{modifyby,jdbcType=INTEGER}, #{modifydate,jdbcType=TIMESTAMP},
       #{apklocpath,jdbcType=VARCHAR}, #{apkfilename,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.xuan.springappinfo.pojo.AppVersion" >
@@ -101,7 +101,7 @@
         #{modifyby,jdbcType=INTEGER},
       </if>
       <if test="modifydate != null" >
-        #{modifydate,jdbcType=TIMESTAMP},
+        NOW(),
       </if>
       <if test="apklocpath != null" >
         #{apklocpath,jdbcType=VARCHAR},

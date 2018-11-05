@@ -148,4 +148,17 @@ public class AppInfoSController {
     public Result appObtained(@RequestParam(name = "appid") Integer appid){
         return appInfoSService.appObtained(appid);
     }
+
+    /**
+     * <p>Description: 新增APP版本 </p>
+     * @author Yat-Xuan
+     * @params: [appid]
+     * @return: com.xuan.springappinfo.utils.Result
+     * @Date: 2018/11/3 0003 15:41
+     * @Modified By:
+    */
+    @RequestMapping("/addVersion")
+    public Result addVersion(@RequestParam(name = "appid") Integer appid){
+        return appInfoSService.addVersion(appid);
+    }
 }

@@ -22,6 +22,12 @@ spring:
         max-idle: 8
         max-wait: -1m
     timeout: 5000m
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 0
+      max-file-size: 200Mb
+      max-request-size: 200Mb
 
 mybatis:
   mapper-locations: classpath:mapping/*.xml

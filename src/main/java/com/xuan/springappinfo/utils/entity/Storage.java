@@ -20,7 +20,7 @@ public class Storage {
     /**
      * APP id
      */
-    private int appId;
+    private Integer appId;
     /**
      * APP 软件名称
      */
@@ -36,7 +36,7 @@ public class Storage {
     /**
      * APP 界面语言ID
      */
-    private int interfaceLanguageId;
+    private Integer interfaceLanguageId;
     /**
      * APP 软件大小（单位：M）
      */
@@ -48,7 +48,7 @@ public class Storage {
     /**
      * APP 开发者id
      */
-    private int devUserId;
+    private Integer devUserId;
     /**
      * APP 开发者名称
      */
@@ -141,10 +141,35 @@ public class Storage {
     /**
      * APP 最新的版本id
      */
-    private int versionId;
+    private Integer versionId;
     /**
-     * APP 最新的版本编号
+     * APP 版本编号
      */
     private String versionNo;
+
+    /**
+     * APP 版本大小
+     */
+    private double versionSize;
+
+    /**
+     * APP 版本发布状态
+     */
+    private String releaseStatusName;
+
+    /**
+     * APP版本的APK名称
+     */
+    private String apkFileName;
+
+    /**
+     * APP 版本的最近更新时间
+     */
+    private Date modifyDate;
+
+    /**
+     * APP 版本下载路径
+     */
+    private String apkLocPath;
 
 }
