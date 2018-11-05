@@ -1,0 +1,3 @@
+$(function () {
+    $.session.get('key');
+})
