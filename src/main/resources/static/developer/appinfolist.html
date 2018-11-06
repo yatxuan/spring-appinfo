@@ -446,10 +446,13 @@
 
     //APP修改版本方法
     $(document).on('click', ".modifyVersion", function () {
-        alert("修改版本")
         var appid = $(this).attr("appid");
         $.get("/appInfoS/getAppInfoId", {id: appid}, function (data) {
             if (data.success) {
+                if(data.data.versionNo==null){
+                    alert("该APP没有版本信息，请先新增版本号");
+                    return;
+                }
                 window.location.replace("/developer/appversionmodify.html?appid=" + appid);
             } else {
                 alert(data.message);
@@ -459,7 +462,6 @@
 
     //APP修改基本信息方法
     $(document).on('click', ".modifyAppInfo", function () {
-        alert("修改基本信息")
         var appid = $(this).attr("appid");
         $.get("/appInfoS/getAppInfoId", {id: appid}, function (data) {
             if (data.success) {

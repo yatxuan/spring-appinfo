@@ -54,7 +54,7 @@ public class AppInfoSController {
      **/
     @RequestMapping("/saveAppInfo")
     public Result saveAppInfo(AppInfoS appInfoS) {
-
+        appInfoS.setCreationdate(new Date());
         return appInfoSService.saveAppInfo(appInfoS);
 
     }

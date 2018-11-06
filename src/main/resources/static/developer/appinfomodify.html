@@ -51,7 +51,7 @@
                     </div>
                     <div class="profile_info">
                         <span>Welcome,</span>
-                        <h2><%--${devUserSession.devCode }--%></h2>
+                        <h2></h2>
                     </div>
                 </div>
                 <!-- /menu profile quick info -->
@@ -62,7 +62,7 @@
                 <div id="sidebar-menu"
                      class="main_menu_side hidden-print main_menu">
                     <div class="menu_section">
-                        <h3><%--${devUserSession.devName }--%></h3>
+                        <h3></h3>
                         <ul class="nav side-menu">
                             <li><a><i class="fa fa-home"></i> APP账户管理 <span
                                     class="fa fa-chevron-down"></span>
@@ -79,16 +79,15 @@
                             </a>
                                 <ul class="nav child_menu">
                                     <li>
-                                        <a href="\jsp\developer\appinfolistA.jsp">APP查看</a>
+                                        <a href="\developer\appinfolistA.html">APP查看</a>
                                     </li>
                                     <li>
-                                        <a href="\jsp\developer\appinfolist.jsp">APP维护</a>
+                                        <a href="\developer\appinfolist.html">APP维护</a>
                                     </li>
                                 </ul>
                             </li>
                         </ul>
                     </div>
-
 
                 </div>
                 <!-- /sidebar menu -->
@@ -123,11 +122,11 @@
                                         class="user-profile dropdown-toggle" data-toggle="dropdown"
                                         aria-expanded="false"> <img
                                 src="/statics/images/img.jpg"
-                                alt="">${devUserSession.devCode } <span
+                                alt=""> <span
                                 class=" fa fa-angle-down"></span> </a>
                             <ul class="dropdown-menu dropdown-usermenu pull-right">
                                 <li><a
-                                        href="/index.jsp"><i
+                                        href="/login.html"><i
                                         class="fa fa-sign-out pull-right"></i> Log Out</a>
                                 </li>
                             </ul>
@@ -186,14 +185,14 @@
                         <div class="x_panel">
                             <div class="x_title">
                                 <h2>修改APP基础信息 <i class="fa fa-user"></i>
-                                    <small>${devUserSession.devName}</small>
+                                    <small></small>
                                 </h2>
                                 <div class="clearfix"></div>
                             </div>
                             <div class="x_content">
                                 <form class="form-horizontal form-label-left" action="appinfomodifysave" method="post"
                                       enctype="multipart/form-data">
-                                    <input type="hidden" name="id" id="id" value="${appInfo.id}">
+                                    <input type="hidden" name="id" id="id" value="">
                                     <div class="item form-group">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">软件名称 <span
                                                 class="required">*</span>
@@ -201,51 +200,48 @@
                                         <div class="col-md-6 col-sm-6 col-xs-12">
                                             <input id="softwareName" class="form-control col-md-7 col-xs-12"
                                                    data-validate-length-range="20" data-validate-words="1"
-                                                   name="softwareName" value="${appInfo.softwareName}"
+                                                   name="softwareName" value=""
                                                    required="required"
                                                    placeholder="请输入软件名称" type="text">
                                         </div>
                                     </div>
                                     <div class="item form-group">
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >APK名称 <span
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">APK名称 <span
                                                 class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
                                             <input id="APKName" type="text" class="form-control col-md-7 col-xs-12"
-                                                   name="APKName" value="${appInfo.APKName}" readonly="readonly">
+                                                   name="APKName" value="" readonly="readonly">
                                         </div>
                                     </div>
 
                                     <div class="item form-group">
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >支持ROM <span
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">支持ROM <span
                                                 class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
                                             <input id="supportROM" class="form-control col-md-7 col-xs-12"
-                                                   name="supportROM" value="${appInfo.supportROM}" required="required"
+                                                   name="supportROM" value="" required="required"
                                                    data-validate-length-range="20" data-validate-words="1"
                                                    placeholder="请输入支持的ROM" type="text">
                                         </div>
                                     </div>
                                     <div class="item form-group">
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >界面语言 <span
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">界面语言 <span
                                                 class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <input id="interfaceLanguage" class="form-control col-md-7 col-xs-12"
-                                                   data-validate-length-range="20" data-validate-words="1"
-                                                   required="required"
-                                                   name="interfaceLanguage" value="${appInfo.interfaceLanguage}"
-                                                   placeholder="请输入软件支持的界面语言" type="text">
+                                            <select name="language" class="form-control"
+                                                    required="required"></select>
                                         </div>
                                     </div>
                                     <div class="item form-group">
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >软件大小 <span
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">软件大小 <span
                                                 class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
                                             <input type="number" id="softwareSize" name="softwareSize"
-                                                   value="${appInfo.softwareSize}" required="required"
+                                                   value="" required="required"
                                                    data-validate-minmax="10,500" placeholder="请输入软件大小，单位为Mb"
                                                    class="form-control col-md-7 col-xs-12">
                                         </div>
@@ -254,8 +250,7 @@
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">所属平台 <span
                                                 class="required">*</span></label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <input type="hidden" value="${appInfo.flatformId}" id="fid"/>
-                                            <select name="flatformId" id="flatformId" class="form-control"
+                                            <select name="queryFlatformId" id="flatformId" class="form-control"
                                                     required="required"></select>
                                         </div>
                                     </div>
@@ -264,9 +259,8 @@
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">一级分类 <span
                                                 class="required">*</span></label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <input type="hidden" value="${appInfo.categoryLevel1}" id="cl1"/>
-                                            <select name="categoryLevel1" id="categoryLevel1" class="form-control"
-                                                    required="required"></select>
+                                            <select name="queryCategoryLevel1" id="categoryLevel1" class="form-control"
+                                                    required="required" onchange="TwoAPP()"> </select>
                                         </div>
                                     </div>
 
@@ -274,9 +268,8 @@
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">二级分类 <span
                                                 class="required">*</span></label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <input type="hidden" value="${appInfo.categoryLevel2}" id="cl2"/>
-                                            <select name="categoryLevel2" id="categoryLevel2" class="form-control"
-                                                    required="required"></select>
+                                            <select name="queryCategoryLevel2" id="categoryLevel2" class="form-control"
+                                                    required="required" onchange="ThreeAPP()"></select>
                                         </div>
                                     </div>
 
@@ -284,52 +277,40 @@
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">三级分类 <span
                                                 class="required">*</span></label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <input type="hidden" value="${appInfo.categoryLevel3}" id="cl3"/>
-                                            <select name="categoryLevel3" id="categoryLevel3" class="form-control"
+                                            <select name="queryCategoryLevel3" id="categoryLevel3" class="form-control"
                                                     required="required"></select>
                                         </div>
                                     </div>
                                     <div class="item form-group">
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >APP状态 <span
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">APP状态 <span
                                                 class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
                                             <input id="statusName" type="text" class="form-control col-md-7 col-xs-12"
-                                                   name="statusName" value="${appInfo.statusName}" readonly="readonly">
+                                                   name="statusName" value="" readonly="readonly">
                                         </div>
                                     </div>
                                     <div class="item form-group">
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >应用简介
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">应用简介
                                             <span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
               <textarea id="appInfo" name="appInfo" required="required"
                         placeholder="请输入本软件的相关信息，本信息作为软件的详细信息进行软件的介绍。" class="form-control col-md-7 col-xs-12">
-              ${appInfo.appInfo}</textarea>
+              </textarea>
                                         </div>
                                     </div>
                                     <div class="item form-group">
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >LOGO图片 <span
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">LOGO图片 <span
                                                 class="required">*</span>
                                         </label>
-                                        <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <input type="hidden" id="logoPicPath" name="logoPicPath"
-                                                   value="${appInfo.logoPicPath}"/>
-                                            <input type="hidden" id="logoLocPath" name="logoLocPath"
-                                                   value="${appInfo.logoLocPath}"/>
-                                            <div id="uploadfile" style="display: none">
-                                                <input id="attach" type="file" class="form-control col-md-7 col-xs-12"
-                                                       name="attach">
-                                                <p><span style="color:red;font-weight: bold;">*注：1、大小不得超过500k.2、图片格式：jpg、png、jpeg、pneg</span>
-                                                </p>
-                                            </div>
-                                            <div id="logoFile"></div>
-                                            ${fileUploadError }
+                                        <div class="col-md-6 col-sm-6 col-xs-12" id="img">
+
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="col-md-6 col-md-offset-3">
-                                            <if test="${appInfo.status == 3}">
+                                            <if test="">
                                                 <button id="send1" type="submit" name="status" value="1"
                                                         class="btn btn-success">保存并再次提交审核
                                                 </button>
@@ -367,12 +348,96 @@
 <script src="/statics/js/jquery.mCustomScrollbar.concat.min.js"></script>
 <!-- Custom Theme Scripts -->
 <script src="/statics/js/custom.min.js"></script>
-<!-- validator -->
-<!--     <script src="/statics/js/validator.js"></script> -->
 <!-- dropzone -->
 <script src="/statics/js/dropzone.js"></script>
-<script src="/js/jquery-1.12.4.js"></script>
-<!--<script src="/statics/localjs/appinfomodify.js"></script>-->
+<script src="/statics/js/jquery-1.12.4.js"></script>
+<script src="/statics/js/APP/APPCLass.js"></script>
+<script src="/statics/js/APP/FlatForm.js"></script>
+<script src="/statics/js/APP/InterfaceLanguage.js"></script>
+<script>
+    $(function () {
+        var appid = getUrlParam("appid");
+        $.get("/appInfoS/getAppInfoId", {id: appid}, function (data) {
+            $('[name="softwareName"]').val(data.data.softwareName);
+            $('[name="APKName"]').val(data.data.apkname);
+            $('[name="supportROM"]').val(data.data.supportROM);
+            $('[name="softwareSize"]').val(data.data.softwareSize);
+            $('[name="statusName"]').val(data.data.statusType);
+            $('[name="appInfo"]').val(data.data.appIntroduction);
+
+            if (data.data.logoPicPath == null) {
+                $("#img").html("没有图片显示");
+            } else {
+                $("#img").html("<img src=" + data.data.logoPicPath + ">");
+            }
+
+            SelectThwooClass(data.data.firstAPPClassId)
+            SelectThreeClss(data.data.twoAPPClassId)
+
+            $('[name="language"]').find("option[value='" + data.data.interfaceLanguageId + "']").attr("selected", true);
+            $('[name="queryFlatformId"]').find("option[value='" + data.data.flatformId + "']").attr("selected", true);
+            $('[name="queryCategoryLevel1"]').find("option[value='" + data.data.firstAPPClassId + "']").attr("selected", true);
+            $('[name="queryCategoryLevel2"]').find("option[value='" + data.data.twoAPPClassId + "']").attr("selected", true);
+            $('[name="queryCategoryLevel3"]').find("option[value='" + data.data.threeAPPClassId + "']").attr("selected", true);
+
+        })
+    })
+
+    //获取url中的参数
+    function getUrlParam(variable) {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split("=");
+            if (pair[0] == variable) {
+                return pair[1];
+            }
+        }
+        return (false);
+    }
+
+
+    //传入一级分类查询二级分类
+    function SelectThwooClass(fristID) {
+        //清空三级分类
+        $('[name="queryCategoryLevel3"]').html(" ");
+
+        $.get("/twoAPPClass/getTwoAPPClass?firstAPPClassId=" + fristID, function (data) {
+            var html = "<option value='0'>--请选择--</option>";
+            if (data.success) {
+                var result = data.data;
+                for (var i = 0; i < result.length; i++) {
+                    var item = result[i];
+                    html += "<option value=" + item.id + ">" + item.twoappname + "</option>"
+                }
+                $('[name="queryCategoryLevel2"]').html(html);
+            } else {
+                alert(data.message);
+            }
+        });
+    }
+
+
+    //传入二级分类的id查询三级分类
+    function SelectThreeClss(twoID) {
+        //清空三级分类
+        $('[name="queryCategoryLevel3"]').html(" ");
+
+        $.get("/threeAPPClass/getThreeAPPClass?twoAPPClassId=" + twoID, function (data) {
+            var html = "<option value='0'>--请选择--</option>";
+            if (data.success) {
+                var result = data.data;
+                for (var i = 0; i < result.length; i++) {
+                    var item = result[i];
+                    html += "<option value=" + item.id + ">" + item.threeappname + "</option>"
+                }
+                $('[name="queryCategoryLevel3"]').html(html);
+            } else {
+                alert(data.message);
+            }
+        });
+    }
+</script>
 </body>
 </html>
 

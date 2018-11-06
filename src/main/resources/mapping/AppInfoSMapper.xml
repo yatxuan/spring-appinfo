@@ -46,28 +46,27 @@
         SELECT
         count(1)
         FROM
-        appInfos app,
-        devUser dev,
-        devUser devtwo,
-        `STATUS` st,
-        frame fr,
-        flatform ff,
-        firstappclass fa,
-        twoAppClass ta,
-        threeAPPClass tha,
-        appVersion av,
-        interfacelanguage il
+            devUser dev,
+            devUser devtwo,
+            `STATUS` st,
+            frame fr,
+            flatform ff,
+            firstappclass fa,
+            twoAppClass ta,
+            threeAPPClass tha,
+            interfacelanguage il,
+            appInfos app
+          LEFT JOIN appVersion av ON app.versionId = av.id
         WHERE
-        app.devUserId = dev.id
-        AND app.statusId = st.id
-        AND app.frameId = fr.id
-        AND app.flatformId = ff.id
-        AND app.createdBy = devtwo.id
-        AND app.firstAPPClassId = fa.id
-        AND app.twoAPPClassId = ta.id
-        AND app.threeAPPClassId = tha.id
-        AND app.versionId = av.id
-        AND app.interfaceLanguageId = il.id
+            app.devUserId = dev.id
+            AND app.statusId = st.id
+            AND app.frameId = fr.id
+            AND app.flatformId = ff.id
+            AND app.createdBy = devtwo.id
+            AND app.firstAPPClassId = fa.id
+            AND app.twoAPPClassId = ta.id
+            AND app.threeAPPClassId = tha.id
+            AND app.interfaceLanguageId = il.id
         <if test="appId!=null and appId != 0">
             AND app.id = #{appId,jdbcType=INTEGER}
         </if>
@@ -99,62 +98,61 @@
 
     <select id="getAppInfoS" resultType="com.xuan.springappinfo.utils.entity.Storage">
         SELECT
-        app.id "appId",
-        app.softwareName "softwareName",
-        app.APKName "aPKName",
-        app.supportROM "supportROM",
-        app.interfaceLanguageId "interfaceLanguageId",
-        il.`language` "language",
-        app.softwareSize "softwareSize",
-        app.updateDate "updateDate",
-        app.devUserId "devUserId",
-        app.appIntroduction "appIntroduction",
-        app.statusId "statusId",
-        app.frameId "frameId",
-        app.onSaleDate "onSaleDate",
-        app.offSaleDate "offSaleDate",
-        app.flatformId "flatformId",
-        app.downloads "downloads",
-        app.createdBy "createdBy",
-        app.creationDate "creationDate",
-        app.firstAPPClassId "firstAPPClassId",
-        app.twoAPPClassId "twoAPPClassId",
-        app.threeAPPClassId "threeAPPClassId",
-        app.logoPicPath "logoPicPath",
-        app.logoLocPath "logoLocPath",
-        app.versionId "versionId",
-        dev.devName "devUserName",
-        devtwo.devName "createByName",
-        st.statusType "statusType",
-        fr.frameType "frameType",
-        ff.flatformName "flatformName",
-        fa.firstAPPName "firstAPPName",
-        ta.twoAPPName "twoAPPName",
-        tha.threeAPPName "threeAPPName",
-        av.versionNo "versionNo"
+            app.id "appId",
+            app.softwareName "softwareName",
+            app.APKName "aPKName",
+            app.supportROM "supportROM",
+            app.interfaceLanguageId "interfaceLanguageId",
+            il.`language` "language",
+            app.softwareSize "softwareSize",
+            app.updateDate "updateDate",
+            app.devUserId "devUserId",
+            app.appIntroduction "appIntroduction",
+            app.statusId "statusId",
+            app.frameId "frameId",
+            app.onSaleDate "onSaleDate",
+            app.offSaleDate "offSaleDate",
+            app.flatformId "flatformId",
+            app.downloads "downloads",
+            app.createdBy "createdBy",
+            app.creationDate "creationDate",
+            app.firstAPPClassId "firstAPPClassId",
+            app.twoAPPClassId "twoAPPClassId",
+            app.threeAPPClassId "threeAPPClassId",
+            app.logoPicPath "logoPicPath",
+            app.logoLocPath "logoLocPath",
+            app.versionId "versionId",
+            dev.devName "devUserName",
+            devtwo.devName "createByName",
+            st.statusType "statusType",
+            fr.frameType "frameType",
+            ff.flatformName "flatformName",
+            fa.firstAPPName "firstAPPName",
+            ta.twoAPPName "twoAPPName",
+            tha.threeAPPName "threeAPPName",
+            av.versionNo "versionNo"
         FROM
-        appInfos app,
-        devUser dev,
-        devUser devtwo,
-        `STATUS` st,
-        frame fr,
-        flatform ff,
-        firstappclass fa,
-        twoAppClass ta,
-        threeAPPClass tha,
-        appVersion av,
-        interfacelanguage il
+            devUser dev,
+            devUser devtwo,
+            `STATUS` st,
+            frame fr,
+            flatform ff,
+            firstappclass fa,
+            twoAppClass ta,
+            threeAPPClass tha,
+            interfacelanguage il,
+            appInfos app
+            LEFT JOIN appVersion av ON app.versionId = av.id
         WHERE
-        app.devUserId = dev.id
-        AND app.statusId = st.id
-        AND app.frameId = fr.id
-        AND app.flatformId = ff.id
-        AND app.createdBy = devtwo.id
-        AND app.firstAPPClassId = fa.id
-        AND app.twoAPPClassId = ta.id
-        AND app.threeAPPClassId = tha.id
-        AND app.versionId = av.id
-        AND app.interfaceLanguageId = il.id
+            app.devUserId = dev.id
+            AND app.statusId = st.id
+            AND app.frameId = fr.id
+            AND app.flatformId = ff.id
+            AND app.createdBy = devtwo.id
+            AND app.firstAPPClassId = fa.id
+            AND app.twoAPPClassId = ta.id
+            AND app.threeAPPClassId = tha.id
+            AND app.interfaceLanguageId = il.id
         <if test="appId!=null and appId != 0">
             AND app.id = #{appId,jdbcType=INTEGER}
         </if>
@@ -222,7 +220,6 @@
         tha.threeAPPName "threeAPPName",
         av.versionNo "versionNo"
     FROM
-        appInfos app,
         devUser dev,
         devUser devtwo,
         `STATUS` st,
@@ -231,8 +228,9 @@
         firstappclass fa,
         twoAppClass ta,
         threeAPPClass tha,
-        appVersion av,
-        interfacelanguage il
+        interfacelanguage il,
+        appInfos app
+      LEFT JOIN appVersion av ON app.versionId = av.id
     WHERE
         app.devUserId = dev.id
         AND app.statusId = st.id
@@ -242,7 +240,6 @@
         AND app.firstAPPClassId = fa.id
         AND app.twoAPPClassId = ta.id
         AND app.threeAPPClassId = tha.id
-        AND app.versionId = av.id
         AND app.interfaceLanguageId = il.id
         AND app.id = #{appId,jdbcType=INTEGER}
     </select>

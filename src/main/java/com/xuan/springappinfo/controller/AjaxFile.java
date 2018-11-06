@@ -4,6 +4,7 @@ import com.xuan.springappinfo.utils.Result;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -27,7 +28,6 @@ public class AjaxFile {
      * 实现文件上传
      */
     @PostMapping("/getFile")
-    @ResponseBody
     public Result fileUpload(@RequestParam(value = "file", required = false) MultipartFile file) {
 
         if (file.isEmpty()) {
@@ -71,6 +71,62 @@ public class AjaxFile {
             e.printStackTrace();
         }
         return Result.getCustomize(false, -1, "文件上传失败");
+    }
+
+    /**
+     * <p>Description:图片上传 </p>
+     * @author Yat-Xuan
+     * @params: [file]
+     * @return: com.xuan.springappinfo.utils.Result
+     * @Date: 2018/11/6 0006 13:47
+     * @Modified By:
+    */
+    @RequestMapping("/pictureFile")
+    public Result pictureFile(@RequestParam(value = "file") MultipartFile pictureFile, HttpSession session){
+        if (pictureFile.isEmpty()) {
+            return Result.getCustomize(false, -1, "文件不存在");
+        }
+
+        //获取文件名字(包含文件格式的后缀)
+        String fileName = pictureFile.getOriginalFilename();
+
+        //获取文件大小
+        double size = formatDouble((double) pictureFile.getSize());
+        System.out.println(fileName + "--->" + size);
+
+        //文件保存地址
+        // session.getServletContext().getRealPath("/statics/images");
+        String path = "f:/test";
+
+        //判断是否有文件同名情况
+        fileName = ShowFile(path, fileName);
+
+        File dest = new File(path + "/" + fileName);
+        if (!dest.getParentFile().exists()) {
+            //判断文件父目录是否存在
+            dest.getParentFile().mkdir();   //创建目录
+        }
+
+        try {
+            pictureFile.transferTo(dest);
+
+            Map<String, Object> map = new HashMap<>(16);
+
+            //图片储存路径
+            map.put("logoPicPath", path + "/" + fileName);
+            //图片的服务器储存路径
+            map.put("logoLocPath", path + "/" + fileName);
+
+            return Result.getCustomize(true, -1, "文件上传成功", map);
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return Result.getCustomize(false, -1, "图片上传失败");
     }
 
     /**
