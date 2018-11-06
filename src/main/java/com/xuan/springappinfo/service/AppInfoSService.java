@@ -124,13 +124,4 @@ public interface AppInfoSService {
      */
     Result appObtained(Integer appid);
 
-    /**
-     * <p>Description: 新增APP版本号 </p>
-     * @author Yat-Xuan
-     * @params: [appid]
-     * @return: com.xuan.springappinfo.utils.Result
-     * @Date: 2018/11/5 0005 8:20
-     * @Modified By:
-    */
-    Result addVersion(Integer appid);
 }

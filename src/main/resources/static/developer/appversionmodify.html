@@ -185,7 +185,7 @@
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="x_panel">
                             <div class="x_title">
-                                <h2>新增APP版本信息 <i class="fa fa-user"></i>
+                                <h2>修改APP最新版本信息 <i class="fa fa-user"></i>
                                     <small>${devUserSession.devName}</small>
                                 </h2>
                                 <div class="clearfix"></div>
@@ -205,14 +205,13 @@
                                                    class="table table-striped table-bordered dt-responsive nowrap dataTable no-footer dtr-inline collapsed"
                                                    cellspacing="0" width="100%" role="grid"
                                                    aria-describedby="datatable-responsive_info" style="width: 100%;">
-
                                             </table>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="clearfix"></div>
                                 <div class="x_title">
-                                    <h2>新增版本信息</h2>
+                                    <h2>修改最新版本信息</h2>
                                     <ul class="nav navbar-right panel_toolbox">
                                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                         </li>
@@ -222,56 +221,58 @@
                                 <div class="x_content" style="display: block;">
                                     <br>
                                     <form class="form-horizontal form-label-left"
-                                          method="post"
-                                          enctype="multipart/form-data">
-                                        <input type="hidden" name="appinfoid" value="">
+                                          method="post" enctype="multipart/form-data">
                                         <div class="item form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" >版本号
-                                                <span class="required">*</span>
+                                            <input type="hidden" id="appId">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">版本号 <span
+                                                    class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input id="versionNo" class="form-control col-md-7 col-xs-12"
-                                                       data-validate-length-range="20" data-validate-words="1"
-                                                       name="versionno"
-                                                       placeholder="请输入版本号" type="text" required="required">
+                                                <input class="form-control col-md-7 col-xs-12"
+                                                       value=""
+                                                       type="text" readonly="readonly" id="versionNo" name="versionNo">
                                             </div>
                                         </div>
                                         <div class="item form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" >发布状态
-                                                <span class="required">*</span></label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="hidden" name="releasestatusid" id="publishStatus"
-                                                       value="3">预发布
-                                            </div>
-                                        </div>
-                                        <div class="item form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="textarea">版本简介
-                                                <span class="required">*</span>
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">版本大小 <span
+                                                    class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-              <textarea id="versionInfo" name="versioninfo" required="required"
-                        placeholder="请输入本版本的相关信息，本信息作为该版本的详细信息进行版本介绍。"
-                        class="form-control col-md-7 col-xs-12"></textarea>
+                                                <input type="text" id="versionSize" name="versionSize"
+                                                       value="" readonly="readonly"
+                                                       data-validate-minmax="10,500" placeholder="请输入版本大小，单位为Mb"
+                                                       class="form-control col-md-7 col-xs-12">
                                             </div>
                                         </div>
+
                                         <div class="item form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" >apk文件
-                                                <span class="required">*</span>
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">发布状态 <span
+                                                    class="required">*</span></label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <input type="hidden" name="publishStatus" id="publishStatus" value="3">预发布
+                                            </div>
+                                        </div>
+
+                                        <div class="item form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">版本简介 <span
+                                                    class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="file" class="form-control col-md-7 col-xs-12"
-                                                       name="apkFileName" id="a_downloadLink" required="required"/>
+                                              <textarea id="versionInfo" name="versionInfo" readonly="readonly"
+                                                        placeholder="请输入本版本的相关信息，本信息作为该版本的详细信息进行版本介绍。"
+                                                        class="form-control col-md-7 col-xs-12">
+                                              </textarea>
                                             </div>
                                         </div>
                                         <div class="ln_solid"></div>
                                         <div class="form-group">
                                             <div class="col-md-6 col-md-offset-3">
-                                                <button id="send" type="button" class="btn btn-success"
-                                                        onclick="saveAppVersion()">保存
-                                                </button>
+                                                <button id="send" type="button" class="btn btn-success">保存</button>
                                                 <button type="button" class="btn btn-primary" id="back">返回</button>
                                             </div>
                                         </div>
+                                        <div class="clearfix"></div>
+                                        <br/><br/>
                                     </form>
                                 </div>
                             </div>
@@ -302,11 +303,36 @@
 <!-- Custom Theme Scripts -->
 <script src="/statics/js/custom.min.js"></script>
 <!-- validator -->
-<script src="/statics/js/validator.js"></script>
+<!--     <script src="/statics/js/validator.js"></script> -->
 <!-- dropzone -->
 <script src="/statics/js/dropzone.js"></script>
 <script src="/statics/js/jquery-1.12.4.js"></script>
-<script src="/statics/js/APP/AppVersion.js"></script>
+<script src="/statics/js/APP/UpdateAppVersion.js"></script>
+<script>
+    $(document).on('click', "#optAPP", function () {
+        var id = $(this).attr("appversionid");
+        $.get("/appVersion/getAppVersionId", {appVersionId: id}, function (data) {
+            if (data.success) {
+                $("#versionNo").val(data.data.versionno);
+                $("#versionSize").val(data.data.versionsize);
+                $("#versionInfo").text(data.data.versioninfo);
+                $("#appId").val(id);
+            }
+        })
+    })
+
+    $("#send").click(function () {
+        var versionid = $("#appId").val();
+        var appId = getUrlParam("appid");
+        $.get("/appInfoS/modifiedVersion", {
+            id: appId,
+            versionid: versionid
+        }, function (data) {
+            alert(data.message);
+            window.location.replace("/developer/appinfolist.html");
+        })
+    })
+</script>
 </body>
 </html>
 

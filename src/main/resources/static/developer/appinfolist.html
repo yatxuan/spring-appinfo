@@ -448,10 +448,9 @@
     $(document).on('click', ".modifyVersion", function () {
         alert("修改版本")
         var appid = $(this).attr("appid");
-        $.get("/appInfoS/", {appid: appid}, function (data) {
+        $.get("/appInfoS/getAppInfoId", {id: appid}, function (data) {
             if (data.success) {
-                alert(data.message);
-                SelectApp();
+                window.location.replace("/developer/appversionmodify.html?appid=" + appid);
             } else {
                 alert(data.message);
             }
@@ -462,28 +461,22 @@
     $(document).on('click', ".modifyAppInfo", function () {
         alert("修改基本信息")
         var appid = $(this).attr("appid");
-        $.get("/appInfoS/", {appid: appid}, function (data) {
+        $.get("/appInfoS/getAppInfoId", {id: appid}, function (data) {
             if (data.success) {
-                alert(data.message);
-                SelectApp();
+                if (data.data.statusId == 2) {
+                    return alert("该APP已通过审核，不能进行信息修改");
+                }
+                window.location.replace("/developer/appinfomodify.html?appid=" + appid);
             } else {
                 alert(data.message);
             }
         })
     })
 
-    //APP修改查看信息方法
+    //APP查看信息方法
     $(document).on('click', ".viewApp", function () {
-        alert("查看基本信息")
         var appid = $(this).attr("appid");
-        $.get("/appInfoS/", {appid: appid}, function (data) {
-            if (data.success) {
-                alert(data.message);
-                SelectApp();
-            } else {
-                alert(data.message);
-            }
-        })
+        window.location.replace("/developer/appinfoview.html?appid=" + appid);
     })
 
     //APP删除方法

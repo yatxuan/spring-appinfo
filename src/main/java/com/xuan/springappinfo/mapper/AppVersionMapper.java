@@ -22,6 +22,7 @@ public interface AppVersionMapper {
     int updateByPrimaryKey(AppVersion record);
 
     @Select("SELECT\n" +
+            "app.id `appVersionId`," +
             "\taf.softwareName `softwareName`,\n" +
             "\tversionNo,\n" +
             "\tversionSize,\n" +
@@ -38,4 +39,7 @@ public interface AppVersionMapper {
             "AND app.releaseStatusId = r.id\n" +
             "AND appInfoId = #{id}")
     List<Storage> getAppVersionS(int id);
+
+    @Select("select * from appversion where id=#{appVersionId}")
+    AppVersion getAppVersionId(Integer appVersionId);
 }

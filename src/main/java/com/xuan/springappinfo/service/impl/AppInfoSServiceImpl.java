@@ -190,12 +190,6 @@ public class AppInfoSServiceImpl implements AppInfoSService {
         return Result.getCustomize(false, -1, "下架失败");
     }
 
-    @Override
-    public Result addVersion(Integer appid) {
-        return null;
-    }
-
-
     public static Map<String, Object> getMap(Condition condition, Page page) {
         Map<String, Object> map = new HashMap<>(16);
         if (condition != null) {

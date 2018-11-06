@@ -2,14 +2,6 @@ $(function () {
     var appid = getUrlParam("appid");
     $('[name="appinfoid"]').val(appid);
     getVersion();
-
-    $('#send').click(function () {
-        var versionSize = $("#versionSize").val();
-        if (versionSize <= 0) {
-            alert("版本号不能为负！");
-            return false;
-        }
-    })
 })
 
 //获取url中的参数
@@ -68,7 +60,13 @@ function getVersion() {
             "        style=\"width: 50px;\"\n" +
             "        aria-label=\"Last name: activate to sort column ascending\">\n" +
             "        最新更新时间\n" +
-            "    </th>\n" +
+            "    </th>" +
+            "    <th class=\"sorting\" tabindex=\"0\"\n" +
+            "        aria-controls=\"datatable-responsive\" rowspan=\"1\" colspan=\"1\"\n" +
+            "        style=\"width: 50px;\"\n" +
+            "        aria-label=\"Last name: activate to sort column ascending\">\n" +
+            "        操作\n" +
+            "     </th>\n" +
             "</tr>\n" +
             "</thead>" +
             "<tbody>";
@@ -83,64 +81,15 @@ function getVersion() {
                     "        <a href=http://" + result[i].apkLocPath + ">" + result[i].apkFileName + "\n" +
                     "    </td>\n" +
                     "    <td>" + result[i].modifyDate + "</td>\n" +
+                    "    <td>" +
+                    "         <a appversionid=" + result[i].appVersionId+ " style='cursor:pointer' id='optAPP'>选择APP版本</a>" +
+                    "    </td>\n" +
                     "</tr>\n";
             }
         }
         html += "</tbody>";
         $('#datatable-responsive').html(html);
     })
-}
-
-//新增APP版本数据
-function saveAppVersion() {
-
-    var appid = getUrlParam("appid");
-    $('[name="appinfoid"]').val(appid);
-
-    var formData = new FormData();
-    formData.append("file", document.getElementById("a_downloadLink").files[0]);
-    $.ajax({
-        type: 'post',
-        url: "/file/getFile",
-        data: formData,
-        cache: false,
-        processData: false,
-        contentType: false,
-    }).success(function (data) {
-        var filebool = data.success;
-        var versionSize = data.data.versionSize;
-        var apkLocPath = data.data.apkLocPath;
-        var apkFileName = data.data.apkFileName;
-
-        if (filebool) {
-            $.get("/login/loginUser", function (user) {
-                if (user.success) {
-                    var modifyby = user.data.id;
-                    var versionno = $('[name="versionno"]').val();
-                    var versionInfo = $('[name="versioninfo"]').val();
-
-                    $.get("/appVersion/saveAppVersion", {
-                        appinfoid: appid,
-                        versionno: versionno,
-                        versioninfo: versionInfo,
-                        versionsize: versionSize,
-                        apklocpath: apkLocPath,
-                        apkfilename: apkFileName,
-                        modifyby: modifyby
-                    }, function (data) {
-                        if (data.success) {
-                            alert("APP版本新增成功");
-                            window.location.replace("/developer/appinfolist.html")
-                        } else {
-                            alert(data.message);
-                        }
-                    })
-                }
-            })
-        }
-    }).error(function () {
-        alert("上传失败");
-    });
 }
 
 

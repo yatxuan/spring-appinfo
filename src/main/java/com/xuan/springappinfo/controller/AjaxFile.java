@@ -59,7 +59,7 @@ public class AjaxFile {
             Map<String, Object> map = new HashMap<>(16);
 
             map.put("versionSize", size);
-            map.put("apkLocPath", path);
+            map.put("apkLocPath", path + "/" + fileName);
             map.put("apkFileName", fileName);
 
             return Result.getCustomize(true, -1, "文件上传成功", map);

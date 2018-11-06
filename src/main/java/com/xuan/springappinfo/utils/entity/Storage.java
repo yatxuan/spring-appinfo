@@ -18,9 +18,13 @@ import java.util.Date;
 public class Storage {
 
     /**
-     * APP id
+     * APP软件 id
      */
     private Integer appId;
+    /**
+     * APP 版本号id
+     */
+    private Integer appVersionId;
     /**
      * APP 软件名称
      */
@@ -38,6 +42,11 @@ public class Storage {
      */
     private Integer interfaceLanguageId;
     /**
+     * APP 语言
+     */
+    private String language;
+
+    /**
      * APP 软件大小（单位：M）
      */
     private double softwareSize;
@@ -54,7 +63,7 @@ public class Storage {
      */
     private String devUserName;
     /**
-     * APP 简介
+     * APP 应用简介
      */
     private String appIntroduction;
     /**

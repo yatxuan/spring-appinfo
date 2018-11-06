@@ -38,4 +38,10 @@ public class AppVersionServiceImpl implements AppVersionService {
         List<Storage> storageList = appVersionMapper.getAppVersionS(appId);
         return Result.getList(storageList);
     }
+
+    @Override
+    public Result getAppVersionId(Integer appVersionId) {
+        AppVersion appVersion = appVersionMapper.getAppVersionId(appVersionId);
+        return Result.getClass(appVersion);
+    }
 }

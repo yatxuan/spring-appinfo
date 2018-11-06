@@ -24,4 +24,13 @@ public interface AppVersionService {
      * @return
      **/
     Result getAppVersionS(int appId);
+
+    /**通过APP的版本id查询它的信息
+     * @Author YatXuan
+     * @Description //TODO
+     * @Date 14:07 2018/10/31 0031
+     * @Param [appVersionId] APP版本号id
+     * @return com.xuan.springappinfo.utils.Result
+     **/
+    Result getAppVersionId(Integer appVersionId);
 }

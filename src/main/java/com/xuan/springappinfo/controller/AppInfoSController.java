@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -125,40 +126,44 @@ public class AppInfoSController {
 
     /**
      * <p>Description: APP上架功能 </p>
+     *
      * @author Yat-Xuan
      * @params: [appid]
      * @return: com.xuan.springappinfo.utils.Result
      * @Date: 2018/11/2 0002 22:25
      * @Modified By:
-    */
+     */
     @RequestMapping("/appShelf")
-    public Result appShelf(@RequestParam(name = "appid") Integer appid){
+    public Result appShelf(@RequestParam(name = "appid") Integer appid) {
         return appInfoSService.appShelf(appid);
     }
 
     /**
      * <p>Description: APP下架功能 </p>
+     *
      * @author Yat-Xuan
      * @params: [appid]
      * @return: com.xuan.springappinfo.utils.Result
      * @Date: 2018/11/2 0002 22:27
      * @Modified By:
-    */
+     */
     @RequestMapping("/appObtained")
-    public Result appObtained(@RequestParam(name = "appid") Integer appid){
+    public Result appObtained(@RequestParam(name = "appid") Integer appid) {
         return appInfoSService.appObtained(appid);
     }
 
     /**
-     * <p>Description: 新增APP版本 </p>
+     * <p>Description: 修改APP版本 </p>
+     *
      * @author Yat-Xuan
-     * @params: [appid]
+     * @params: [appid, appVersionId] AppID APP版本ID
      * @return: com.xuan.springappinfo.utils.Result
-     * @Date: 2018/11/3 0003 15:41
+     * @Date: 2018/11/6 0006 10:54
      * @Modified By:
-    */
-    @RequestMapping("/addVersion")
-    public Result addVersion(@RequestParam(name = "appid") Integer appid){
-        return appInfoSService.addVersion(appid);
+     */
+    @RequestMapping("/modifiedVersion")
+    public Result modifiedVersion(AppInfoS appInfoS) {
+        appInfoS.setUpdatedate(new Date());
+        return appInfoSService.updateAppStatus(appInfoS);
     }
 }
