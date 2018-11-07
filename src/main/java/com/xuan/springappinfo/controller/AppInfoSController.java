@@ -190,7 +190,11 @@ public class AppInfoSController {
     }
 
     @RequestMapping("/exportExcel")
-    public void exportExcel(Condition condition, HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public void exportExcel(Condition condition, HttpServletRequest request, HttpServletResponse response,String querySoftwareName) throws Exception {
+
+        log.info("导出数据-->开始");
+
+        condition.setSoftwareName(querySoftwareName);
 
         response.reset(); //清除buffer缓存
         //Map<String,Object> map=new HashMap<String,Object>();
@@ -206,7 +210,7 @@ public class AppInfoSController {
             bufferedOutput.flush();
             workbook.write(bufferedOutput);
             bufferedOutput.close();
-            log.info("导出完成");
+            log.info("导出-->完成");
         } catch (IOException e) {
             log.info("导出异常");
             e.printStackTrace();

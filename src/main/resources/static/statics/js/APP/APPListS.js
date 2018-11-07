@@ -206,7 +206,7 @@ function NextPage() {
 
 //末页页查询
 function lastPage() {
-    $('[ name="currentPage"]').val($('[name="currentPage"]').text());
+    $('[ name="currentPage"]').val($('[name="pageCurrNo"]').text());
     SelectApp();
 }
 /*

@@ -13,18 +13,14 @@ $(function () {
 
         $("#pricate").attr("src", data.data.logoPicPath);
 
-        SelectThwooClass(data.data.firstAPPClassId);
-        SelectThreeClass(data.data.twoAPPClassId);
+        SelectThwooClass(data.data.firstAPPClassId, data.data.twoAPPClassId);
+        SelectThreeClass(data.data.twoAPPClassId, data.data.threeAPPClassId);
 
         $('[name="language"]').find("option[value='" + data.data.interfaceLanguageId + "']")
             .attr("selected", true);
         $('[name="queryFlatformId"]').find("option[value='" + data.data.flatformId + "']")
             .attr("selected", true);
         $('[name="queryCategoryLevel1"]').find("option[value='" + data.data.firstAPPClassId + "']")
-            .attr("selected", true);
-        $('[name="queryCategoryLevel2"]').find("option[value='" + data.data.twoAPPClassId + "']")
-            .attr("selected", true);
-        $('[name="queryCategoryLevel3"]').find("option[value='" + data.data.threeAPPClassId + "']")
             .attr("selected", true);
 
     })
@@ -51,7 +47,7 @@ function getUrlParam(variable) {
 
 
 //传入一级分类查询二级分类
-function SelectThwooClass(fristID) {
+function SelectThwooClass(fristID, twoID) {
     //清空三级分类
     $('[name="queryCategoryLevel3"]').html(" ");
 
@@ -61,7 +57,11 @@ function SelectThwooClass(fristID) {
             var result = data.data;
             for (var i = 0; i < result.length; i++) {
                 var item = result[i];
-                html += "<option value=" + item.id + ">" + item.twoappname + "</option>"
+                html += "<option value=' " + item.id + "'";
+                if (item.id == twoID) {
+                    html += "selected";
+                }
+                html += ">" + item.twoappname + "</option>"
             }
             $('[name="queryCategoryLevel2"]').html(html);
         } else {
@@ -72,7 +72,7 @@ function SelectThwooClass(fristID) {
 
 
 //传入二级分类的id查询三级分类
-function SelectThreeClass(twoID) {
+function SelectThreeClass(twoID, threeID) {
     //清空三级分类
     $('[name="queryCategoryLevel3"]').html(" ");
 
@@ -82,7 +82,11 @@ function SelectThreeClass(twoID) {
             var result = data.data;
             for (var i = 0; i < result.length; i++) {
                 var item = result[i];
-                html += "<option value=" + item.id + ">" + item.threeappname + "</option>"
+                html += "<option value=' " + item.id + "'";
+                if (item.id == threeID) {
+                    html += "selected";
+                }
+                html += ">" + item.threeappname + "</option>"
             }
             $('[name="queryCategoryLevel3"]').html(html);
         } else {

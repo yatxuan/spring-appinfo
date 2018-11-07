@@ -1,10 +1,13 @@
 package com.xuan.springappinfo.controller;
 
 import com.xuan.springappinfo.utils.Result;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -82,7 +85,7 @@ public class AjaxFile {
      * @Modified By:
     */
     @RequestMapping("/pictureFile")
-    public Result pictureFile(@RequestParam(value = "file") MultipartFile pictureFile, HttpSession session){
+    public Result pictureFile(@RequestParam(value = "file") MultipartFile pictureFile, HttpServletRequest request){
         if (pictureFile.isEmpty()) {
             return Result.getCustomize(false, -1, "文件不存在");
         }
@@ -95,7 +98,7 @@ public class AjaxFile {
         System.out.println(fileName + "--->" + size);
 
         //文件保存地址
-        // session.getServletContext().getRealPath("/statics/images");
+       String pathpicture= request.getSession().getServletContext().getRealPath("/statics/images");
         String path = "f:/test";
 
         //判断是否有文件同名情况
