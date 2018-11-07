@@ -442,10 +442,10 @@
             <if test="appintroduction != null">
                 appIntroduction = #{appintroduction,jdbcType=VARCHAR},
             </if>
-            <if test="statusid != null">
+            <if test="statusid != null and statusid != 0">
                 statusId = #{statusid,jdbcType=INTEGER},
             </if>
-            <if test="frameid != null">
+            <if test="frameid != null and frameid != 0">
                 frameId = #{frameid,jdbcType=INTEGER},
             </if>
             <if test="onsaledate != null">
@@ -466,13 +466,13 @@
             <if test="creationdate != null">
                 creationDate = #{creationdate,jdbcType=TIMESTAMP},
             </if>
-            <if test="firstappclassid != null">
+            <if test="firstappclassid != null and firstappclassid != 0">
                 firstAPPClassId = #{firstappclassid,jdbcType=INTEGER},
             </if>
-            <if test="twoappclassid != null">
+            <if test="twoappclassid != null and twoappclassid != 0">
                 twoAPPClassId = #{twoappclassid,jdbcType=INTEGER},
             </if>
-            <if test="threeappclassid != null">
+            <if test="threeappclassid != null and threeappclassid != 0">
                 threeAPPClassId = #{threeappclassid,jdbcType=INTEGER},
             </if>
             <if test="logopicpath != null">

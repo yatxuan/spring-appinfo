@@ -27,7 +27,7 @@ function TwoAPP() {
 function ThreeAPP() {
     var twoID = $('[name="queryCategoryLevel2"]').val();
     if (twoID > 0) {
-        SelectThreeClss(twoID);
+        SelectThreeClass(twoID);
     }
 }
 
@@ -53,7 +53,7 @@ function SelectThwooClass(fristID) {
 
 
 //传入二级分类的id查询三级分类
-function SelectThreeClss(twoID) {
+function SelectThreeClass(twoID) {
     //清空三级分类
     $('[name="queryCategoryLevel3"]').html(" ");
 

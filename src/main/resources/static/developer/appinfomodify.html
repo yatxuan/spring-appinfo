@@ -305,17 +305,24 @@
                                                 class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 col-xs-12" id="img">
-
+                                            <img id='pricate' src="">
+                                            <input type='button' value='删除' id='del'>
+                                            <input type="file" style='display: none'
+                                                   class="form-control col-md-7 col-xs-12"
+                                                   name="a_logoPicPath"
+                                                   required="required" id="a_logoPicPath"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="col-md-6 col-md-offset-3">
                                             <if test="">
-                                                <button id="send1" type="submit" name="status" value="1"
-                                                        class="btn btn-success">保存并再次提交审核
+                                                <button id="send1" type="button" name="status" value="1"
+                                                        class="btn btn-success" onclick="keepReview()">保存并再次提交审核
                                                 </button>
                                             </if>
-                                            <button id="send" type="submit" class="btn btn-success">保存</button>
+                                            <button id="send" type="button" class="btn btn-success" onclick="keep()">
+                                                保存
+                                            </button>
                                             <button type="button" class="btn btn-primary" id="back">返回</button>
                                             <br/><br/>
                                         </div>
@@ -351,93 +358,9 @@
 <!-- dropzone -->
 <script src="/statics/js/dropzone.js"></script>
 <script src="/statics/js/jquery-1.12.4.js"></script>
-<script src="/statics/js/APP/APPCLass.js"></script>
 <script src="/statics/js/APP/FlatForm.js"></script>
 <script src="/statics/js/APP/InterfaceLanguage.js"></script>
-<script>
-    $(function () {
-        var appid = getUrlParam("appid");
-        $.get("/appInfoS/getAppInfoId", {id: appid}, function (data) {
-            $('[name="softwareName"]').val(data.data.softwareName);
-            $('[name="APKName"]').val(data.data.apkname);
-            $('[name="supportROM"]').val(data.data.supportROM);
-            $('[name="softwareSize"]').val(data.data.softwareSize);
-            $('[name="statusName"]').val(data.data.statusType);
-            $('[name="appInfo"]').val(data.data.appIntroduction);
-
-            if (data.data.logoPicPath == null) {
-                $("#img").html("没有图片显示");
-            } else {
-                $("#img").html("<img src=" + data.data.logoPicPath + ">");
-            }
-
-            SelectThwooClass(data.data.firstAPPClassId)
-            SelectThreeClss(data.data.twoAPPClassId)
-
-            $('[name="language"]').find("option[value='" + data.data.interfaceLanguageId + "']").attr("selected", true);
-            $('[name="queryFlatformId"]').find("option[value='" + data.data.flatformId + "']").attr("selected", true);
-            $('[name="queryCategoryLevel1"]').find("option[value='" + data.data.firstAPPClassId + "']").attr("selected", true);
-            $('[name="queryCategoryLevel2"]').find("option[value='" + data.data.twoAPPClassId + "']").attr("selected", true);
-            $('[name="queryCategoryLevel3"]').find("option[value='" + data.data.threeAPPClassId + "']").attr("selected", true);
-
-        })
-    })
-
-    //获取url中的参数
-    function getUrlParam(variable) {
-        var query = window.location.search.substring(1);
-        var vars = query.split("&");
-        for (var i = 0; i < vars.length; i++) {
-            var pair = vars[i].split("=");
-            if (pair[0] == variable) {
-                return pair[1];
-            }
-        }
-        return (false);
-    }
-
-
-    //传入一级分类查询二级分类
-    function SelectThwooClass(fristID) {
-        //清空三级分类
-        $('[name="queryCategoryLevel3"]').html(" ");
-
-        $.get("/twoAPPClass/getTwoAPPClass?firstAPPClassId=" + fristID, function (data) {
-            var html = "<option value='0'>--请选择--</option>";
-            if (data.success) {
-                var result = data.data;
-                for (var i = 0; i < result.length; i++) {
-                    var item = result[i];
-                    html += "<option value=" + item.id + ">" + item.twoappname + "</option>"
-                }
-                $('[name="queryCategoryLevel2"]').html(html);
-            } else {
-                alert(data.message);
-            }
-        });
-    }
-
-
-    //传入二级分类的id查询三级分类
-    function SelectThreeClss(twoID) {
-        //清空三级分类
-        $('[name="queryCategoryLevel3"]').html(" ");
-
-        $.get("/threeAPPClass/getThreeAPPClass?twoAPPClassId=" + twoID, function (data) {
-            var html = "<option value='0'>--请选择--</option>";
-            if (data.success) {
-                var result = data.data;
-                for (var i = 0; i < result.length; i++) {
-                    var item = result[i];
-                    html += "<option value=" + item.id + ">" + item.threeappname + "</option>"
-                }
-                $('[name="queryCategoryLevel3"]').html(html);
-            } else {
-                alert(data.message);
-            }
-        });
-    }
-</script>
+<script src="/statics/js/APP/appinfomodify.js"></script>
 </body>
 </html>
 
