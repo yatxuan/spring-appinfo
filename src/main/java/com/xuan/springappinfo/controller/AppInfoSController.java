@@ -166,4 +166,17 @@ public class AppInfoSController {
         appInfoS.setUpdatedate(new Date());
         return appInfoSService.updateAppStatus(appInfoS);
     }
+
+    /**
+     * <p>Description: 删除APP信息，及APP的所有版本 </p>
+     * @author Yat-Xuan
+     * @params: [appid]
+     * @return: com.xuan.springappinfo.utils.Result
+     * @Date: 2018/11/7 0007 10:20
+     * @Modified By:
+    */
+    @RequestMapping("/appinfoDel")
+    public Result appinfoDel(@RequestParam(name = "appid") Integer appid){
+        return appInfoSService.appinfoDel(appid);
+    }
 }

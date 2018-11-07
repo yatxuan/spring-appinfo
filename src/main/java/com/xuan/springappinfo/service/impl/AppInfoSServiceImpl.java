@@ -1,6 +1,7 @@
 package com.xuan.springappinfo.service.impl;
 
 import com.xuan.springappinfo.mapper.AppInfoSMapper;
+import com.xuan.springappinfo.mapper.AppVersionMapper;
 import com.xuan.springappinfo.pojo.AppInfoS;
 import com.xuan.springappinfo.service.AppInfoSService;
 import com.xuan.springappinfo.utils.Page;
@@ -31,6 +32,9 @@ public class AppInfoSServiceImpl implements AppInfoSService {
 
     @Resource
     private AppInfoSMapper appInfoSMapper;
+
+    @Resource
+    private AppVersionMapper appVersionMapper;
 
     @Override
     public List<Storage> getAppInfoS(Condition condition, Page page) {
@@ -188,6 +192,23 @@ public class AppInfoSServiceImpl implements AppInfoSService {
 
         log.info("下架失败");
         return Result.getCustomize(false, -1, "下架失败");
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Result appinfoDel(Integer appid) {
+
+        try {
+            int appversion = appVersionMapper.delAPPVersionAppinfoId(appid);
+            int appinfo = appInfoSMapper.deleteByPrimaryKey(appid);
+
+            if (appinfo > 0 && appversion > 0) {
+                return Result.getSuccess();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Result.getError();
     }
 
     public static Map<String, Object> getMap(Condition condition, Page page) {

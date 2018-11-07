@@ -124,4 +124,13 @@ public interface AppInfoSService {
      */
     Result appObtained(Integer appid);
 
+    /**
+     * <p>Description: 删除APP信息，及APP的所有版本 </p>
+     * @author Yat-Xuan
+     * @params: [appid]
+     * @return: com.xuan.springappinfo.utils.Result
+     * @Date: 2018/11/7 0007 10:20
+     * @Modified By:
+     */
+    Result appinfoDel(Integer appid);
 }

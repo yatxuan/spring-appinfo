@@ -2,6 +2,7 @@ package com.xuan.springappinfo.mapper;
 
 import com.xuan.springappinfo.pojo.AppVersion;
 import com.xuan.springappinfo.utils.entity.Storage;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -42,4 +43,16 @@ public interface AppVersionMapper {
 
     @Select("select * from appversion where id=#{appVersionId}")
     AppVersion getAppVersionId(Integer appVersionId);
+
+    /**
+     * <p>Description: 通过APP软件id，删除版本信息 </p>
+     *
+     * @author Yat-Xuan
+     * @params: [id]
+     * @return: int
+     * @Date: 2018/11/7 0007 10:30
+     * @Modified By:
+     */
+    @Delete("delete from appversion where appInfoId=#{id}")
+    int delAPPVersionAppinfoId(Integer id);
 }

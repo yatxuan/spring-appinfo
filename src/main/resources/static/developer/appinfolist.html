@@ -449,7 +449,7 @@
         var appid = $(this).attr("appid");
         $.get("/appInfoS/getAppInfoId", {id: appid}, function (data) {
             if (data.success) {
-                if(data.data.versionNo==null){
+                if (data.data.versionNo == null) {
                     alert("该APP没有版本信息，请先新增版本号");
                     return;
                 }
@@ -483,16 +483,18 @@
 
     //APP删除方法
     $(document).on('click', ".deleteApp", function () {
-        alert("删除APP")
+
         var appid = $(this).attr("appid");
-        $.get("/appInfoS/", {appid: appid}, function (data) {
-            if (data.success) {
-                alert(data.message);
-                SelectApp();
-            } else {
-                alert(data.message);
-            }
-        })
+        if (confirm("确定删除吗")) {
+            $.get("/appInfoS/appinfoDel", {appid: appid}, function (data) {
+                if (data.success) {
+                    alert(data.message);
+                    SelectApp();
+                } else {
+                    alert(data.message);
+                }
+            })
+        }
     })
 
 </script>
