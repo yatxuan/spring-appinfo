@@ -9,7 +9,7 @@ function SelectApp() {
     var softwareName = $('[ name="querySoftwareName"]').val();
 
     //获取当前页面
-    var currNo = $('[ name="page"]').val();
+    var currNo = $('[ name="currentPage"]').val();
 
     //获取所属平台id
     var flatFormId = $('[ name="queryFlatformId"]').val();
@@ -188,28 +188,28 @@ function SelectApp() {
 
 //第一页查询
 function FirstPage() {
-    $('[ name="page"]').val(1);
+    $('[ name="currentPage"]').val(1);
     SelectApp();
 }
 
 //上一页查询
 function PerviousPage() {
-    $('[ name="page"]').val($('[ name="page"]').val() - 1);
+    $('[ name="currentPage"]').val($('[ name="currentPage"]').val() - 1);
     SelectApp();
 }
 
 //下一页查询
 function NextPage() {
-    $('[ name="page"]').val($('[ name="page"]').val() + 1);
+    $('[ name="currentPage"]').val($('[ name="currentPage"]').val() + 1);
     SelectApp();
 }
 
 //末页页查询
 function lastPage() {
-    $('[ name="page"]').val($('[name="pageCurrNo"]').text());
+    $('[ name="currentPage"]').val($('[name="currentPage"]').text());
     SelectApp();
 }
-
+/*
 //修改APP信息
 function APPUpdate(appid) {
     $("/appInfoS/getAppinfo", {id: appid}, function (data) {
@@ -219,4 +219,4 @@ function APPUpdate(appid) {
             alert(data.message);
         }
     })
-}
+}*/

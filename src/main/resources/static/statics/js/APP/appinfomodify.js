@@ -140,7 +140,6 @@ function keep() {
     if (picture == "") {
         save()
     } else {
-        alert(1)
         saveImg();
     }
 }
@@ -162,58 +161,6 @@ function saveImg() {
         var logoLocPath = data.data.logoLocPath;
 
         if (filebool) {
-            $.get("/login/loginUser", function (user) {
-                if (user.success) {
-                    var createdBy = user.data.id;
-                    var softwareName = $('[name="softwareName"]').val();
-                    var APKName = $('[name="APKName"]').val();
-                    var supportROM = $('[name="supportROM"]').val();
-                    var language = $('[name="language"]').val();
-                    var softwareSize = $('[name="softwareSize"]').val();
-                    var queryFlatformId = $('[name="queryFlatformId"]').val();
-                    var queryCategoryLevel1 = $('[name="queryCategoryLevel1"]').val();
-                    var queryCategoryLevel2 = $('[name="queryCategoryLevel2"]').val();
-                    var queryCategoryLevel3 = $('[name="queryCategoryLevel3"]').val();
-                    var appInfo = $('[name="appInfo"]').val();
-                    var appid = getUrlParam("appid");
-
-                    $.get("/appInfoS/updateAppinfoS", {
-                        softwarename: softwareName,
-                        apkname: APKName,
-                        supportrom: supportROM,
-                        interfacelanguageid: language,
-                        softwaresize: softwareSize,
-                        devuserid: createdBy,
-                        createdby: createdBy,
-                        appintroduction: appInfo,
-                        flatformid: queryFlatformId,
-                        firstappclassid: queryCategoryLevel1,
-                        twoappclassid: queryCategoryLevel2,
-                        threeappclassid: queryCategoryLevel3,
-                        logopicpath: logoPicPath,
-                        logolocpath: logoLocPath,
-                        id: appid
-                    }, function (data) {
-                        if (data.success) {
-                            alert("APP修改成功");
-                            window.location.replace("/developer/appinfolist.html")
-                        } else {
-                            alert(data.message);
-                        }
-                    })
-                }
-            })
-        }
-    }).error(function () {
-        alert("上传失败");
-    });
-}
-
-//修改方法，无图片修改
-function save() {
-    $.get("/login/loginUser", function (user) {
-        if (user.success) {
-            var createdBy = user.data.id;
             var softwareName = $('[name="softwareName"]').val();
             var APKName = $('[name="APKName"]').val();
             var supportROM = $('[name="supportROM"]').val();
@@ -232,13 +179,13 @@ function save() {
                 supportrom: supportROM,
                 interfacelanguageid: language,
                 softwaresize: softwareSize,
-                devuserid: createdBy,
-                createdby: createdBy,
                 appintroduction: appInfo,
                 flatformid: queryFlatformId,
                 firstappclassid: queryCategoryLevel1,
                 twoappclassid: queryCategoryLevel2,
                 threeappclassid: queryCategoryLevel3,
+                logopicpath: logoPicPath,
+                logolocpath: logoLocPath,
                 id: appid
             }, function (data) {
                 if (data.success) {
@@ -248,6 +195,44 @@ function save() {
                     alert(data.message);
                 }
             })
+        }
+    }).error(function () {
+        alert("上传失败");
+    });
+}
+
+//修改方法，无图片修改
+function save() {
+    var softwareName = $('[name="softwareName"]').val();
+    var APKName = $('[name="APKName"]').val();
+    var supportROM = $('[name="supportROM"]').val();
+    var language = $('[name="language"]').val();
+    var softwareSize = $('[name="softwareSize"]').val();
+    var queryFlatformId = $('[name="queryFlatformId"]').val();
+    var queryCategoryLevel1 = $('[name="queryCategoryLevel1"]').val();
+    var queryCategoryLevel2 = $('[name="queryCategoryLevel2"]').val();
+    var queryCategoryLevel3 = $('[name="queryCategoryLevel3"]').val();
+    var appInfo = $('[name="appInfo"]').val();
+    var appid = getUrlParam("appid");
+
+    $.get("/appInfoS/updateAppinfoS", {
+        softwarename: softwareName,
+        apkname: APKName,
+        supportrom: supportROM,
+        interfacelanguageid: language,
+        softwaresize: softwareSize,
+        appintroduction: appInfo,
+        flatformid: queryFlatformId,
+        firstappclassid: queryCategoryLevel1,
+        twoappclassid: queryCategoryLevel2,
+        threeappclassid: queryCategoryLevel3,
+        id: appid
+    }, function (data) {
+        if (data.success) {
+            alert("APP修改成功");
+            window.location.replace("/developer/appinfolist.html")
+        } else {
+            alert(data.message);
         }
     })
 }
@@ -270,59 +255,6 @@ function saveImgReview() {
         var logoLocPath = data.data.logoLocPath;
 
         if (filebool) {
-            $.get("/login/loginUser", function (user) {
-                if (user.success) {
-                    var createdBy = user.data.id;
-                    var softwareName = $('[name="softwareName"]').val();
-                    var APKName = $('[name="APKName"]').val();
-                    var supportROM = $('[name="supportROM"]').val();
-                    var language = $('[name="language"]').val();
-                    var softwareSize = $('[name="softwareSize"]').val();
-                    var queryFlatformId = $('[name="queryFlatformId"]').val();
-                    var queryCategoryLevel1 = $('[name="queryCategoryLevel1"]').val();
-                    var queryCategoryLevel2 = $('[name="queryCategoryLevel2"]').val();
-                    var queryCategoryLevel3 = $('[name="queryCategoryLevel3"]').val();
-                    var appInfo = $('[name="appInfo"]').val();
-                    var appid = getUrlParam("appid");
-
-                    $.get("/appInfoS/updateAppinfoS", {
-                        softwarename: softwareName,
-                        apkname: APKName,
-                        supportrom: supportROM,
-                        interfacelanguageid: language,
-                        softwaresize: softwareSize,
-                        devuserid: createdBy,
-                        createdby: createdBy,
-                        appintroduction: appInfo,
-                        flatformid: queryFlatformId,
-                        firstappclassid: queryCategoryLevel1,
-                        twoappclassid: queryCategoryLevel2,
-                        threeappclassid: queryCategoryLevel3,
-                        logopicpath: logoPicPath,
-                        logolocpath: logoLocPath,
-                        statusid: 1,
-                        id: appid
-                    }, function (data) {
-                        if (data.success) {
-                            alert("APP修改成功");
-                            window.location.replace("/developer/appinfolist.html")
-                        } else {
-                            alert(data.message);
-                        }
-                    })
-                }
-            })
-        }
-    }).error(function () {
-        alert("上传失败");
-    });
-}
-
-//修改后，审核方法，无图片修改
-function saveReview() {
-    $.get("/login/loginUser", function (user) {
-        if (user.success) {
-            var createdBy = user.data.id;
             var softwareName = $('[name="softwareName"]').val();
             var APKName = $('[name="APKName"]').val();
             var supportROM = $('[name="supportROM"]').val();
@@ -341,13 +273,13 @@ function saveReview() {
                 supportrom: supportROM,
                 interfacelanguageid: language,
                 softwaresize: softwareSize,
-                devuserid: createdBy,
-                createdby: createdBy,
                 appintroduction: appInfo,
                 flatformid: queryFlatformId,
                 firstappclassid: queryCategoryLevel1,
                 twoappclassid: queryCategoryLevel2,
                 threeappclassid: queryCategoryLevel3,
+                logopicpath: logoPicPath,
+                logolocpath: logoLocPath,
                 statusid: 1,
                 id: appid
             }, function (data) {
@@ -358,6 +290,47 @@ function saveReview() {
                     alert(data.message);
                 }
             })
+        }
+    }).error(function () {
+        alert("上传失败");
+    });
+}
+
+//修改后，审核方法，无图片修改
+function saveReview() {
+    var softwareName = $('[name="softwareName"]').val();
+    var APKName = $('[name="APKName"]').val();
+    var supportROM = $('[name="supportROM"]').val();
+    var language = $('[name="language"]').val();
+    var softwareSize = $('[name="softwareSize"]').val();
+    var queryFlatformId = $('[name="queryFlatformId"]').val();
+    var queryCategoryLevel1 = $('[name="queryCategoryLevel1"]').val();
+    var queryCategoryLevel2 = $('[name="queryCategoryLevel2"]').val();
+    var queryCategoryLevel3 = $('[name="queryCategoryLevel3"]').val();
+    var appInfo = $('[name="appInfo"]').val();
+    var appid = getUrlParam("appid");
+
+    $.get("/appInfoS/updateAppinfoS", {
+        softwarename: softwareName,
+        apkname: APKName,
+        supportrom: supportROM,
+        interfacelanguageid: language,
+        softwaresize: softwareSize,
+        devuserid: createdBy,
+        createdby: createdBy,
+        appintroduction: appInfo,
+        flatformid: queryFlatformId,
+        firstappclassid: queryCategoryLevel1,
+        twoappclassid: queryCategoryLevel2,
+        threeappclassid: queryCategoryLevel3,
+        statusid: 1,
+        id: appid
+    }, function (data) {
+        if (data.success) {
+            alert("APP修改成功");
+            window.location.replace("/developer/appinfolist.html")
+        } else {
+            alert(data.message);
         }
     })
 }
