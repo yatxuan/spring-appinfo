@@ -1,5 +1,6 @@
 package com.xuan.springappinfo.service.impl;
 
+import com.sun.deploy.ui.AppInfo;
 import com.xuan.springappinfo.mapper.AppInfoSMapper;
 import com.xuan.springappinfo.mapper.AppVersionMapper;
 import com.xuan.springappinfo.pojo.AppInfoS;
@@ -7,16 +8,16 @@ import com.xuan.springappinfo.service.AppInfoSService;
 import com.xuan.springappinfo.utils.Page;
 import com.xuan.springappinfo.utils.Result;
 import com.xuan.springappinfo.utils.entity.Condition;
+import com.xuan.springappinfo.utils.entity.ExcelBean;
 import com.xuan.springappinfo.utils.entity.Storage;
+import com.xuan.springappinfo.utils.excel.ExcelUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * <p>Description: 描述 </p>
@@ -42,6 +43,13 @@ public class AppInfoSServiceImpl implements AppInfoSService {
         Map<String, Object> map = getMap(condition, page);
 
         return appInfoSMapper.getAppInfoS(map);
+    }
+
+    @Override
+    public List<Map<String, Object>> getAppInfoS(Condition condition) {
+
+        Map<String, Object> map = getMap(condition, null);
+        return appInfoSMapper.getAppInfoExcel(map);
     }
 
     @Override
@@ -230,8 +238,36 @@ public class AppInfoSServiceImpl implements AppInfoSService {
             map.put("currNo", currNo);
             map.put("size", page.getSize());
         }
-
         return map;
     }
+
+
+    @Override
+    public XSSFWorkbook exportExcelInfo(Condition condition) throws Exception{
+        //根据条件查询数据
+        List<Map<String, Object>> list = getAppInfoS(condition);
+
+        List<ExcelBean> excel = new ArrayList<>();
+        Map<Integer,List<ExcelBean>> map = new LinkedHashMap<>();
+
+        //设置标题栏
+        excel.add(new ExcelBean("序号","appId",0));
+        excel.add(new ExcelBean("软件名称","softwareName",0));
+        excel.add(new ExcelBean("APK名称", "aPKName", 0));
+        excel.add(new ExcelBean("软件大小","softwareSize", 0));
+        excel.add(new ExcelBean("所属平台","flatformName",0));
+        //excel.add(new ExcelBean("所属分类","mobile",0));
+        excel.add(new ExcelBean("状态","statusType",0));
+        excel.add(new ExcelBean("下载次数","downloads",0));
+        excel.add(new ExcelBean("最新版本","versionNo",0));
+        map.put(0,excel);
+        String sheetName = "APP信息表";
+        //调用ExcelUtil方法
+        XSSFWorkbook xssfWorkbook = ExcelUtil.createExcelFile(AppInfo.class, list, map, sheetName);
+        System.out.println(xssfWorkbook);
+        return xssfWorkbook;
+    }
+
+
 }
 

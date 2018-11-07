@@ -6,11 +6,18 @@ import com.xuan.springappinfo.utils.Page;
 import com.xuan.springappinfo.utils.Result;
 import com.xuan.springappinfo.utils.entity.Condition;
 import com.xuan.springappinfo.utils.entity.Storage;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Date;
 import java.util.List;
 
@@ -24,6 +31,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/appInfoS")
+@Slf4j
 public class AppInfoSController {
 
     @Resource
@@ -169,14 +177,40 @@ public class AppInfoSController {
 
     /**
      * <p>Description: 删除APP信息，及APP的所有版本 </p>
+     *
      * @author Yat-Xuan
      * @params: [appid]
      * @return: com.xuan.springappinfo.utils.Result
      * @Date: 2018/11/7 0007 10:20
      * @Modified By:
-    */
+     */
     @RequestMapping("/appinfoDel")
-    public Result appinfoDel(@RequestParam(name = "appid") Integer appid){
+    public Result appinfoDel(@RequestParam(name = "appid") Integer appid) {
         return appInfoSService.appinfoDel(appid);
     }
+
+    @RequestMapping("/exportExcel")
+    public void exportExcel(Condition condition, HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+        response.reset(); //清除buffer缓存
+        //Map<String,Object> map=new HashMap<String,Object>();
+        // 指定下载的文件名
+        response.setContentType("application/vnd.ms-excel;charset=UTF-8");
+        response.setHeader("Content-Disposition", "attachment;filename=" + new String("APP信息表.xlsx".getBytes(), "iso-8859-1"));
+        //导出Excel对象
+        XSSFWorkbook workbook = appInfoSService.exportExcelInfo(condition);
+        OutputStream output;
+        try {
+            output = response.getOutputStream();
+            BufferedOutputStream bufferedOutput = new BufferedOutputStream(output);
+            bufferedOutput.flush();
+            workbook.write(bufferedOutput);
+            bufferedOutput.close();
+            log.info("导出完成");
+        } catch (IOException e) {
+            log.info("导出异常");
+            e.printStackTrace();
+        }
+    }
+
 }

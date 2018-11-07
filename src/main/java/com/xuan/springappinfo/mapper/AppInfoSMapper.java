@@ -65,6 +65,9 @@ public interface AppInfoSMapper {
     @Select("select statusId,frameId,versionId from appinfos where id=#{appId}")
     Storage getAppstatusId(@Param("appId") Integer appid);
 
+
+    List<Map<String, Object>> getAppInfoExcel(Map<String, Object> map);
+
     /**
      * 功能描述: <br>
      * 〈查询APP的版本号是否存在〉

@@ -244,6 +244,92 @@
         AND app.id = #{appId,jdbcType=INTEGER}
     </select>
 
+    <select id="getAppInfoExcel" resultType="map">
+        SELECT
+        app.id "appId",
+        app.softwareName "softwareName",
+        app.APKName "aPKName",
+        app.supportROM "supportROM",
+        app.interfaceLanguageId "interfaceLanguageId",
+        il.`language` "language",
+        app.softwareSize "softwareSize",
+        app.updateDate "updateDate",
+        app.devUserId "devUserId",
+        app.appIntroduction "appIntroduction",
+        app.statusId "statusId",
+        app.frameId "frameId",
+        app.onSaleDate "onSaleDate",
+        app.offSaleDate "offSaleDate",
+        app.flatformId "flatformId",
+        app.downloads "downloads",
+        app.createdBy "createdBy",
+        app.creationDate "creationDate",
+        app.firstAPPClassId "firstAPPClassId",
+        app.twoAPPClassId "twoAPPClassId",
+        app.threeAPPClassId "threeAPPClassId",
+        app.logoPicPath "logoPicPath",
+        app.logoLocPath "logoLocPath",
+        app.versionId "versionId",
+        dev.devName "devUserName",
+        devtwo.devName "createByName",
+        st.statusType "statusType",
+        fr.frameType "frameType",
+        ff.flatformName "flatformName",
+        fa.firstAPPName "firstAPPName",
+        ta.twoAPPName "twoAPPName",
+        tha.threeAPPName "threeAPPName",
+        av.versionNo "versionNo"
+        FROM
+        devUser dev,
+        devUser devtwo,
+        `STATUS` st,
+        frame fr,
+        flatform ff,
+        firstappclass fa,
+        twoAppClass ta,
+        threeAPPClass tha,
+        interfacelanguage il,
+        appInfos app
+        LEFT JOIN appVersion av ON app.versionId = av.id
+        WHERE
+        app.devUserId = dev.id
+        AND app.statusId = st.id
+        AND app.frameId = fr.id
+        AND app.flatformId = ff.id
+        AND app.createdBy = devtwo.id
+        AND app.firstAPPClassId = fa.id
+        AND app.twoAPPClassId = ta.id
+        AND app.threeAPPClassId = tha.id
+        AND app.interfaceLanguageId = il.id
+        <if test="appId!=null and appId != 0">
+            AND app.id = #{appId,jdbcType=INTEGER}
+        </if>
+        <if test="softwareName != null and softwareName != '' ">
+            AND app.softwareName like CONCAT('%',#{softwareName},'%')
+        </if>
+        <if test="flatFormId != null and flatFormId != 0">
+            AND app.flatformId = #{flatFormId}
+        </if>
+        <if test="firstAPPClassId != null and firstAPPClassId != 0">
+            AND app.firstAPPClassId = #{firstAPPClassId}
+        </if>
+        <if test="twoAPPClassId != null and twoAPPClassId != 0">
+            AND app.twoAPPClassId = #{twoAPPClassId}
+        </if>
+        <if test="threeAPPClassId != null and threeAPPClassId != 0">
+            AND app.threeAPPClassId = #{threeAPPClassId}
+        </if>
+        <if test="devUserId!=null and devUserId !=0 ">
+            AND app.devUserId = #{devUserId}
+        </if>
+        <if test="frameId != null and frameId != 0 ">
+            AND app.frameId = #{frameId}
+        </if>
+        <if test="statusId != null and statusId != 0 ">
+            AND app.statusId = #{statusId}
+        </if>
+    </select>
+
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from appinfos
