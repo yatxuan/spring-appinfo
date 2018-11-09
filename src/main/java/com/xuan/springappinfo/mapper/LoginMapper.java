@@ -66,11 +66,11 @@ public interface LoginMapper {
      * @Date 2018/10/24 14:01
      * @Param [userCode]
      **/
-    @Select("SELECT" +
-            "userType" +
-            "FROM" +
-            "rolesrelation r,userroles u" +
-            "WHERE r.rolesId = u.id AND userCode=#{userCode}")
+    @Select("SELECT " +
+            "userType " +
+            "FROM " +
+            "rolesrelation r,userroles u " +
+            "WHERE r.rolesId = u.id AND code=#{userCode}")
     List<String> getRoles(String userCode);
 
     /**
@@ -83,12 +83,12 @@ public interface LoginMapper {
      * @Date 2018/10/24 14:02
      * @Param [userCode]
      **/
-    @Select("SELECT" +
-            "permissionName" +
-            "FROM" +
-            "rolesrelation r, userroles u, permissionsrelation pl, permissions p" +
-            "WHERE" +
-            "r.rolesId = u.id AND u.id = pl.roles AND pl.permissions = p.id AND userCode=#{userCode}")
+    @Select("SELECT " +
+            "permissionName " +
+            "FROM " +
+            "rolesrelation r, userroles u, permissionsrelation pl, permissions p " +
+            "WHERE " +
+            "r.rolesId = u.id AND u.id = pl.roles AND pl.permissions = p.id AND code=#{userCode}")
     List<String> getPermissions(String userCode);
 
 }

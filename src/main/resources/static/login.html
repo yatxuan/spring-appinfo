@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>后台管理系统</title>
+    <title>APP软件管理系统</title>
 
     <!-- Bootstrap -->
     <link href="/statics/css/bootstrap.min.css" rel="stylesheet">
@@ -28,7 +28,7 @@
         <div class="animate form login_form">
             <section class="login_content">
                 <form>
-                    <h1>后台管理系统</h1>
+                    <h1>APP软件管理系统</h1>
                     <div>
                         <input type="text" class="form-control" name="userCode" placeholder="请输入用户名" required=""/>
                     </div>
@@ -68,7 +68,6 @@
             return;
         }
 
-        // $.get("http://127.0.0.1:9001/login/getuser?code=" + code + "&passWord=" + passWord, function (data) {
         $.get("http://127.0.0.1:9001/login/getuser", {code: code, passWord: passWord}, function (data) {
             if (data.success) {
                 if (data.data.roles == "管理者") {

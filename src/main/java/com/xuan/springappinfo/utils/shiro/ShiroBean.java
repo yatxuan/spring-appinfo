@@ -43,11 +43,11 @@ public class ShiroBean {
         filterChainDefinitionMap.put("/login/html", "anon");
         filterChainDefinitionMap.put("/403.html", "anon");
 
-        // filterChainDefinitionMap.put("/**", "anon");
-        filterChainDefinitionMap.put("/**", "authc");
 
-//        filterChainDefinitionMap.put("/getIndex", "anon");
-//        filterChainDefinitionMap.put("/getIndex", "rolesOr[admin,admin1]");
+       filterChainDefinitionMap.put("/backendUser/selBackendUserA", "rolesOr[超级管理员,人事]");
+       // filterChainDefinitionMap.put("/getIndex", "rolesOr[admin,admin1]");
+
+        filterChainDefinitionMap.put("/**", "authc");
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 

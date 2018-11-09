@@ -44,7 +44,7 @@
                     </div>
                     <div class="profile_info">
                         <span>Welcome,</span>
-                        <h2>用户账号</h2>
+                        <h2>userSession.userCode </h2>
                     </div>
                 </div>
                 <!-- /menu profile quick info -->
@@ -54,7 +54,7 @@
                 <!-- sidebar menu -->
                 <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                     <div class="menu_section">
-                        <h3>用户名称</h3>
+                        <h3>userSession.userName </h3>
                         <ul class="nav side-menu">
                             <li><a><i class="fa fa-home"></i> APP管理 <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
@@ -64,7 +64,7 @@
                             </li>
                             <li><a><i class="fa fa-edit"></i> 用户管理 <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
-                                    <li><a href="javascript:;" onclick="BackgroundUserManagement()">后台用户管理</a></li>
+                                    <li><a href="javascript:;">后台用户管理</a></li>
                                     <li><a href="javascript:;">开发者资质审核</a></li>
                                 </ul>
                             </li>
@@ -112,7 +112,7 @@
                         <li class="">
                             <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
                                aria-expanded="false">
-                                <img src="/statics/images/img.jpg" alt="">userSession.userCode
+                                <img src="/statics/images/img.jpg" alt=""><%--userSession.userCode --%>
                                 <span class=" fa fa-angle-down"></span>
                             </a>
                             <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -125,16 +125,15 @@
                             <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
                                 <li>
                                     <a>
-                                        <span class="image">
-                                            <img src="/statics/images/img.jpg" alt="Profile Image"/>
-                                        </span>
+                                        <span class="image"><img src="/statics/images/img.jpg"
+                                                                 alt="Profile Image"/></span>
                                         <span>
-                                          <span>John Smith</span>
-                                          <span class="time">3 mins ago</span>
-                                        </span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
                                         <span class="message">
-                                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                                        </span>
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
                                     </a>
                                 </li>
                                 <li>
@@ -152,25 +151,21 @@
                                 </li>
                                 <li>
                                     <a>
-                                        <span class="image">
-                                            <img src="/statics/images/img.jpg"
-                                                 alt="Profile Image"/>
-                                        </span>
+                                        <span class="image"><img src="/statics/images/img.jpg"
+                                                                 alt="Profile Image"/></span>
                                         <span>
-                                          <span>John Smith</span>
-                                          <span class="time">3 mins ago</span>
-                                        </span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
                                         <span class="message">
                           Film festivals used to be do-or-die moments for movie makers. They were where...
-                                        </span>
+                        </span>
                                     </a>
                                 </li>
                                 <li>
                                     <a>
-                                        <span class="image">
-                                            <img src="/statics/images/img.jpg"
-                                                                 alt="Profile Image"/>
-                                        </span>
+                                        <span class="image"><img src="/statics/images/img.jpg"
+                                                                 alt="Profile Image"/></span>
                                         <span>
                           <span>John Smith</span>
                           <span class="time">3 mins ago</span>
@@ -197,30 +192,35 @@
         <!-- /top navigation -->
         <div class="right_col" role="main">
             <div class="">
-                <div class="page-title">
-                    <div class="title_left">
-                        <h3>
-                            <h3>
-                                欢迎你：userSession.userName<strong> | 角色：userSession.userTypeName</strong>
-                            </h3>
-                        </h3>
+                <div class="clearfix"></div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2>查看管理员信息 <i class="fa fa-user"></i>${userSession.userName}</small></h2>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_title">
+                                <h2>查看后台管理员信息</h2>
+                                <div class="clearfix"></div>
+                            </div>
+                            <br/><br/>
+                        </div>
                     </div>
                 </div>
-                <div class="clearfix"></div>
             </div>
         </div>
     </div>
+    <!-- /page content -->
+    <!-- footer content -->
+    <footer>
+        <div class="pull-right">
+            ?016 All Rights Reserved.
+        </div>
+        <div class="clearfix"></div>
+    </footer>
+    <!-- /footer content -->
 </div>
-<!-- /page content -->
-<!-- footer content -->
-<footer>
-    <div class="pull-right">
-        ?016 All Rights Reserved.
-    </div>
-    <div class="clearfix"></div>
-</footer>
-<!-- /footer content -->
-<div>
 </div>
 <!-- jQuery -->
 <script src="/statics/js/jquery.min.js"></script>
@@ -234,26 +234,6 @@
 <script src="/statics/js/jquery.mCustomScrollbar.concat.min.js"></script>
 <!-- Custom Theme Scripts -->
 <script src="/statics/js/custom.min.js"></script>
-<script>
-    function BackgroundUserManagement() {
-        $.ajax({
-            url:'/backendUser/selBackendUserA',
-            type:'POST',
-            success:function(data){
-                //请求成功
-                window.location.replace(data.message);
-            },
-            error:function(xhr, textStatus, errorThrown){
-                //请求失败
-                //通过状态码判断401
-                if (xhr.status === 401) {
-                    alert('您好，你的权限不足，请在重新登录后，在进行访问。');
-                    //返回首页
-                    // window.location.href = '首页的地址';
-                }
-            }
-        });
-    }
-</script>
+<script src="/statics/js/APP/appcheck.js"></script>
 </body>
 </html>
