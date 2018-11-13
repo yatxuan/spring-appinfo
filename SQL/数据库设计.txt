@@ -1,0 +1,135 @@
+后台用户表：backendUser
+	id
+	userCode 用户账号(唯一)
+	userPassword 用户密码
+	userName 用户名称
+	userTypeId（外键）用户角色类型（来源于用户类型表userType）
+	creationDate 创建时间
+
+后台用户信息记录更改表：backendUserRecordChange
+	id
+	backendUserId 后台用户id(外键，来源于backendUser后台用户表)
+	modifyBy 更新者id（来源于backendUser后台用户表的用户id）
+	modifyDate 最新更新时间
+
+用户类型表: userroles
+	id
+	type 用户类型（分为：超管、财务、市场、运营、销售）
+
+用户身份（角色）表：UserRoles
+	id
+	Code （开发者账号或用户账号）
+	roles 用户身份
+
+用户权限表：permissions
+	id
+	roles 用户角色
+	permissions 用户权限
+
+
+开发者用户表：devUser
+	id
+	devCode 开发者帐号(唯一)
+	devName 开发者名称
+	devPassword 开发者密码
+	devEmail 开发者电子邮箱
+	devInfo 开发者简介
+	creationDate 创建时间
+
+开发者用户信息记录更改表：devUserRecordChange
+	id
+	backendUserId 开发者用户id(外键，来源于devUser开发者用户表)
+	modifyBy 更新者账号（来源于所有用户表的用户账号，可以是开发者用户表的用户账号，也可以是后台用户表的用户账号）
+	modifyDate 最新更新时间
+
+APP基础信息表 appInfos （一个APP有多个版本信息，与APP版本信息（appVersion）是一对多的关系）
+	id
+	softwareName 软件名称
+	APKName APK名称（唯一）
+	supportROM 支持ROM(版本号)
+	interfaceLanguageId 界面语言
+	softwareSize 软件大小（单位：M）
+	updateDate APP版本更新日期
+	devUserId   开发者id（外键，来源于devUser开发者信息表的用户id）
+	appIntroduction    应用简介
+	statusId   审核状态（外键，来源于：status（APP来源平台表））
+	frameId  上架状态（外键，来源于：frame表）
+	onSaleDate   上架时间
+	offSaleDate   下架时间
+	flatformId   所属平台（外键，来源于：flatform表）
+	downloads   下载量（单位：次）
+	createdBy   创建者（外键，来源于devUser开发者信息表的用户id）
+	creationDate   创建时间
+	firstAPPClassId   所属一级分类（外键，来源于：firstAPPClass表）
+	twoAPPClassId   所属二级分类（外键，来源于：twoAPPClass表）
+	threeAPPClassId   所属三级分类（外键，来源于：threeAPPClass表）
+	logoPicPath    LOGO图片url路径
+	logoLocPath    LOGO图片的服务器存储路径
+	versionId   最新的版本id（外键，来源于：APP版本信息表：appVersion）
+
+界面语言表：interfaceLanguage
+	id
+	language 语言
+
+审核表：status
+	id
+	statusType 审核状态（1 待审核 2 审核通过 3 审核不通过）
+
+上架状态：frame
+	id
+	frameType 上架状态（1 未上架 2 已上架 3 已下架）
+
+APP来源平台 flatform
+	id
+	flatformName APP来源（1 手机 2 平板 3 通用）
+
+一级分类：firstAPPClass
+	id
+	firstAPPName 一级分类名称
+
+二级分类：twoAPPClass
+	id
+	twoAPPName 二级分类名称
+	firstAPPClassId 对应一级分类的名称
+
+三级分类：threeAPPClass
+	id
+	threeAPPName 三级分类名称
+	twoAPPClassId 对应二级分类的名称
+
+APP版本记录表：appVersion
+	id     主键id,
+	appInfoId     APP基本信息（外键，来源于：appInfo表的主键id）
+	versionNo      版本号
+	versionInfo       版本介绍
+	releaseStatusId     发布状态（来源于：releaseStatus表）
+	downloadLink       下载链接,
+	versionSize    版本大小（单位：M）
+	modifyBy     更新者（外键，来源于devUser开发者信息表的用户id）
+	modifyDate     最新更新时间
+	apkLocPath       apk文件的服务器存储路径
+	apkFileName       上传的apk文件名称
+
+APP发布状态：releaseStatus
+	id
+	releaseStatusName 发布状态：(1 未发布 2 已发布 3 预发布)
+
+APP广告表：Advertisement
+	id
+	appInfoId     APP基本信息（外键，来源于：appInfo表的主键id）
+	adPicPath 广告图片存储路径
+	adPV 广告点击量
+	carouselPosition 轮播位（1-n）
+	startTime 起效时间
+	endTime 失效时间
+	createdBy 创建者（外键，来源于backendUser后台用户表的用户id）
+	creationDate 创建时间
+	modifyBy 更新者（外键，来源于backendUser后台用户表的用户id）
+	modifyDate 最新更新时间
+
+
+
+
+
+
+
