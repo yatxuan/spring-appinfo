@@ -18,8 +18,8 @@ import java.io.IOException;
 /**
  * 〈返回json空值去掉null和""〉 〈功能详细描述〉
  *
- * @author gogym
- * @version 2017年10月13日
+ * @author 
+ * @version 
  * @see JacksonConfig
  * @since
  *//*
